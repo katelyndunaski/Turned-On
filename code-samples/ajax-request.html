@@ -8,19 +8,22 @@
 	
 	<script type="text/javascript">
 
-		function myfunction()
+		function whatToDoIfAjaxCallSucceeded(data)
 		{
-			$.get( "http://songless.com/test.py", function(data) {
-			  $("#theresultgoeshere").html(data);
-			});
+			$("#dataFromTheServerWillGoHere").html(data);
+		}
+
+		function doTheAjaxRequest()
+		{
+			$.get("http://songless.com/test.py", whatToDoIfAjaxCallSucceeded);
 		}
 
 	</script>
 	
 	<form>
-		<button type="button" id="thebutton" onclick="myfunction()">hi</button>
+		<button type="button" id="thebutton" onclick="doTheAjaxRequest()">hi</button>
 	</form>
 	
-	<div id="theresultgoeshere"></div>
+	<div id="dataFromTheServerWillGoHere"></div>
 </body>
 </html>
