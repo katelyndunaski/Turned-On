@@ -1,0 +1,16 @@
+// Download the twilio-csharp library from twilio.com/docs/csharp/install 
+using System; 
+using Twilio; 
+class Example 
+{ 
+ static void Main(string[] args) 
+ { 
+ 	// Find your Account Sid and Auth Token at twilio.com/user/account 
+ 	string AccountSid = "ACf3f0805e01bc0a3db41e7aae79bc96d5"; 
+ 	string AuthToken = "acf544c7ffb70d7b888eabc81d75698a"; 
+ 	var twilio = new TwilioRestClient(AccountSid, AuthToken); 
+ 
+ 	var message = twilio.SendMessage("+14012065509", "2063838296", "Hi Adam! Just checking: are you signing up for TurnedOn? Say yes or no!", null, null); 
+ 	Console.WriteLine(message.Sid); 
+ } 
+}
