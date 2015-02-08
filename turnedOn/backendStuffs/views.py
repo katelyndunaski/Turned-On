@@ -30,6 +30,10 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 
 	UserinGroup.create(userPhoneNumber, groupName, regionCode, True, twilioNumber)
 
+        response = HttpResponse()
+        response.status_code = 200
+        return response
+
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
