@@ -8,7 +8,7 @@
 	
 	<script type="text/javascript">
 
-	var data = [{userid:"bird", status:"on"},{userid:"katelyn", status:"on"},{userid:"soccer", status:"off"},];
+	var data = [{groupid:"bird", status:"on"},{groupid:"katelyn", status:"on"},{groupid:"soccer", status:"off"},];
 	var VarUserid = "";
 	var VarStatus = "";
 	
@@ -17,9 +17,9 @@
 			for (i = 0, len= data.length; i < len; i++)
 			{
 			
-			  VarUserid = "<tr><td>" + data[i]["userid"] + "</td><td>" +
-			  data[i]["status"] + "</td><tr>";
-			  $("#useriddataFromTheServerWillGoHere").append(VarUserid);
+			  VarUserid = "<tr><td>" + data[i]["status"] + "</td><td>" + " " +
+			  data[i]["groupid"] + "</td><tr>";
+			  $("#groupiddataFromTheServerWillGoHere").append(VarUserid);
 			}
 			  $("#dataFromTheServerWillGoHere").html(data);
 			
@@ -36,7 +36,7 @@
 		<button type="button" id="thebutton" onclick="whatToDoIfAjaxCallSucceeded(data)">hi</button>
 	</form>
 	
-	<div id="useriddataFromTheServerWillGoHere" >
+	<div id="groupiddataFromTheServerWillGoHere" >
 		<ol>
 			hello
 		</ol>
