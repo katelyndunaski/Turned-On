@@ -223,3 +223,7 @@ def createGroup(request):
 	if(len(UserinGroup.objects.filter(region = user.region).filter(name = groupName) )> 0):
 		return JsonResponse({"status":"fail", "Reason":"name taken"})
 	newGroup = UserinGroup(region = user.region, user = user, name = groupName, description = "dfkjahfladkfa", twilioNumber = "14012065509")
+	nexGroup.save()
+	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
+	myResponse['content_type'] = "application/xhtml+xml"
+	return myResponse
