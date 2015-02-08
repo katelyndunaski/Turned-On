@@ -20,20 +20,20 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
-
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+
 	isValidToken = user.token == securityToken
+
 	if isValidToken:
-		# TODO: get these from the database for this user.
-		firstName = "Adam"
-		groupsWithStatus = {"dogs": "on", "cats": "off", "dolphins": "on"}
-		location = "San Francisco, CA"
+		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
+		firstName = user.name
+		location = user.region
 
 		return JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
 	else:
 		response = HttpResponse()
-        response.status_code = 401
-        return response
+		response.status_code = 401
+		return response
 
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
