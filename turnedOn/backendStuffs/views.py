@@ -10,7 +10,6 @@ from random import randint
 from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
 
 
 
@@ -202,6 +201,9 @@ def getGroupsInArea(request):
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
 		i["isOn"] = False
 		allUserGroups.append(i)
-	return render(request, 'backendStuffs/templatForTable.html',{"listi":allUserGroups})
 
-
+	t = loader.get_template('backendStuffs/templatForTable.html')
+	c = RequestContext(request, {"listi":allUserGroups})
+	myResponse = HttpResponse(t.render(c), content_type="application/xhtml+xml")
+	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
+	return myResponse
