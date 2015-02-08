@@ -72,7 +72,10 @@ function login_screen(){
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + "INSTERT TOKEN" + "</p> ");
     $("#replaceAfterLogin1").empty();
+<<<<<<< HEAD
+=======
  
+>>>>>>> da3077ae216b2fc9bbb835d0025eb695353fe362
 }
 
 function create_account(){
