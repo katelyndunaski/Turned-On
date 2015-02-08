@@ -54,14 +54,12 @@ function login(){
     data:{"number":$("#phoneNumber").val(),"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
-        alert('1111111111111horray! 200 status code!');
         token = data.authToken;
         $.ajax({
             type: 'POST',
             data:{"number":num,"securityToken":token},
             url: "http://www.yosephradding.com:8000/getUserInfo",
             success: function(data){
-                alert('22222222222222horray! 200 status code!');
                 login_screen(data);
             }
         })
