@@ -175,8 +175,8 @@ def getGroupsInArea(request):
 		response = HttpResponse()
 		response.status_code = 401
 		return response
-	response = []
-	allUserGroups = UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region")
+	# response = []
+	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region"))
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region"):
 		i[isOn] = False
 		allUserGroups.append(i)
