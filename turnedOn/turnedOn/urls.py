@@ -7,4 +7,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^sendSmsVerificationCode', 'backendStuffs.views.sendSmsVerificationCode', name='sendSmsVerificationCode'),
+    url(r'^checkWhetherSmsVerificationCodeIsValidAndReturnAToken', 'backendStuffs.views.checkWhetherSmsVerificationCodeIsValidAndReturnAToken', name='checkWhetherSmsVerificationCodeIsValidAndReturnAToken'),
+    url(r'^getUserInfo', 'backendStuffs.views.getUserInfo', name='getUserInfo'),
 )
