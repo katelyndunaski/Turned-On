@@ -16,7 +16,7 @@ def home(request):
     return JsonResponse({"text":"hi"})
 
 def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
-	
+	# userPhoneNumber, groupName, regionCode, securityToken
 
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
@@ -41,11 +41,12 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumb
 
 	# This token should have an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
-	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
-	user.token = newMagicTokenForThisUser
-	user.save()
+	
 
 	if isValidCode:
+		user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+		user.token = newMagicTokenForThisUser
+		user.save()
 		return JsonResponse({"authToken": newMagicTokenForThisUser})
 	else:
 		response = HttpResponse()
