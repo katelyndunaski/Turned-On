@@ -19,6 +19,7 @@
 			
 			  VarUserid = "<tr><td>" + data[i]["status"] + "</td><td>" + " " +
 			  data[i]["groupid"] + "</td><tr>";
+			  
 			  $("#groupiddataFromTheServerWillGoHere").append(VarUserid);
 			}
 			  $("#dataFromTheServerWillGoHere").html(data);
@@ -33,7 +34,7 @@
 	</script>
 	
 	<form>
-		<button type="button" id="thebutton" onclick="whatToDoIfAjaxCallSucceeded(data)">hi</button>
+		<input type="checkbox" name="checkbox" value="on"></input>
 	</form>
 	
 	<div id="groupiddataFromTheServerWillGoHere" >
