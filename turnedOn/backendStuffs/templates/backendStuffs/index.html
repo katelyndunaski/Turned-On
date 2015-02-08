@@ -83,37 +83,15 @@
     <div class="jumbotron" style = "height:800px">
       <div id = "signscreen" class="container">
         <form>
-        <h1><br>Create Account</h1>
-        <p>Create account and connect with people around you!</p>
-        <br/>
-        First Name   : <input type="text" id = "firstname" placeholder="Frst Name" class="form-control">
-        <br/> <br/>
-
-
-        <form>        
-        <!-- <form> -->
-        Phone Number : <input type="text" id = "username" placeholder="username" class="form-control">
-        <br/>
-        <hr/>
-        <p> select the city you live in: </p>
-          
-          <input list="browsers">
-          <datalist id="browsers">select among this list below : <br/>
-            <select name ="Location">
-              <option value = "Providence"> "Providence" </option>
-              <option value = "New York"> "New York" </option>
-              <option value = "LA"> "LA" </option>
-              <option value = "Boston"> "Boston" </option>
-              <option value = "Chicago"> "Chicago" </option>    
-            </select>
-          </datalist> 
-
-        <br/><br/>
-        <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
-        <br/><br/>
+          Name: <input type = "text" id = "name">
+          Phone Number: <input type = "text" id = "phoneNumber">
+          <select id = "region">
+            <option value = "0">Please Choose From Below</option>
+          </select>
+          <button id = "getVerNum" onclick="getver()" class = "btn btn-primary btn-lg"></button>
+          Verification Number: <input type = "text" id = "verNum">
+          <button id = "getVerNum" onclick="signUpAccount()" class = "btn btn-primary btn-lg"></button>
         </form>
-
-
       </div>
     </div>
 
