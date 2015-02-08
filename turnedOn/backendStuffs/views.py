@@ -11,10 +11,12 @@ from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 from django.views.decorators.csrf import csrf_exempt
 
+
+
 @csrf_exempt
 def home(request):
     """Renders the home page."""
-    import twilio.rest
+    # import twilio.rest
     return JsonResponse({"text":"hi"})
 
 @csrf_exempt
@@ -51,9 +53,19 @@ def subscribeUserToGroup(request):
 	myGroupMembership = UserinGroup(user = user, name = groupName, region = user.region, isOn = True, twilioNumber = twilioNumber)
 	myGroupMembership.save()
 
-        response = HttpResponse()
-        response.status_code = 200
-        return response
+	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
+	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
+	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+
+	client.messages.create(
+		to=userPhoneNumberToVerify,
+		from_=fromNumber,
+		body="Welcome to the {0} group! Here is where you will see all posts pertain to this group.Reply to create Post".format(groupName),
+	)
+
+    response = HttpResponse()
+    response.status_code = 200
+    return response
 
 @csrf_exempt
 def getUserInfo(request):
@@ -87,7 +99,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	isValidCode = int(user.verificationNumber) == int(verificationCode)
 
         # TODO: This token should have an expiration time.
-        newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
+    newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user.token = newMagicTokenForThisUser
 	user.save()
 
@@ -125,6 +137,14 @@ def sendSmsVerificationCode(request):
 	response = HttpResponse()
 	response.status_code = 200
 	return response
+
+@csrf_exempt
+def giveMeRegions(request):
+	return(JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices]))
+
+@csrf_exempt
+def relayMessageToGroup(request):
+	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
 
 # def contact(request):
 #     """Renders the contact page."""
