@@ -1,0 +1,10 @@
+{%for i in listi%}
+	<tr>
+		{%if i.isOn%}
+			<td><input type="checkbox" name="checkedBox" value="{{i.name}}" checked></td>
+		{%else%}
+			<td><input type="checkbox" name="checkedBox" value="{{i.name}}"></td>
+		{%endif%}
+			<td>{{i.name}}</td>
+	</tr>
+{%endif%}
