@@ -33,6 +33,7 @@ def createUser(request):
 		response = HttpResponse()
 		sendSmsVerificationCode(request)
 		response.status_code = 200
+		response.__setitem__("Access-Control-Allow-Origin", "*")
 		return response
 	else:
 		return sendSmsVerificationCode(request)
@@ -70,6 +71,7 @@ def subscribeUserToGroup(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
@@ -92,6 +94,7 @@ def getUserInfo(request):
 	else:
 		response = HttpResponse()
 		response.status_code = 401
+		response.__setitem__("Access-Control-Allow-Origin", "*")
 		return response
 
 @csrf_exempt
@@ -99,6 +102,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	userPhoneNumberToVerify = request.POST.get("number")
 	verificationCode = request.POST.get("verificationCode")
 
+	print userPhoneNumberToVerify
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidCode = int(user.verificationNumber) == int(verificationCode)
@@ -109,7 +113,9 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	user.save()
 
 	if isValidCode:
-		return JsonResponse({"authToken": newMagicTokenForThisUser})
+		response = JsonResponse({"authToken": newMagicTokenForThisUser})
+		response.__setitem__("Access-Control-Allow-Origin", "*")
+		return response
 	else:
 		response = HttpResponse()
 		response.status_code = 401
@@ -141,6 +147,7 @@ def sendSmsVerificationCode(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
@@ -168,6 +175,7 @@ def relayMessageToGroup(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
