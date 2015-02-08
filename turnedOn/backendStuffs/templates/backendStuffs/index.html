@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="login.js"></script>
+    <title>Turned ON</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><b>Turned ON</b></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <div id = "tobereplaced">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
+            </div>
+            <button id="signin"  onclick="login()" type="button" class="btn btn-success">Sign in</button>
+          </form>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" id = "phoneNumber" placeholder="Phone Number" class="form-control">
+            </div>
+            <button id = "getcode" type="submit" class="btn btn-success" onclick="validate()">Get Verfication Code</button>
+          </form>
+        </div>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+<<<<<<< HEAD
+        <h1 style = "color:white">Get TurnedOn Now!</h1>
+        <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
+        <p><button  id="      "  onclick="  ()" type="button"   class="btn btn-primary btn-lg" >Learn more &raquo;</a></p>
+=======
+<<<<<<< HEAD
+      <div id = "replaceAfterLogin1" class="container jumbotron">
+        <h1>Hello!</h1>
+        <p>Turn on is a platform where you can connect with people with same interests around you!</p>
+        <button id = "createAcc" type="button" class="btn btn-success" onclick="create_account()">Don't have accoount? Create one!</button>
+
+      <div class="container">
+=======
+      <div class="container-fluid">
+>>>>>>> FETCH_HEAD
+        <h1 style = "color:white">Get TurnedOn Now!</h1>
+        <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
+        <button onclick="create_account()" type="button"  class="btn btn-primary btn-lg">Don't have account? Create one! </button>
+        <br/>
+      </div>
+>>>>>>> origin/master
+    </div>
+
+
+    <div id="container1">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4" style="float: right; margin-right: 50px">
+          <h2>Service Description</h2>
+          <p>TurnedOn is a text-based service which connects you to people in your area who share you interests. It does not require an internet connection, making it usable in remote areas and places without access to data. It also only keeps you connected while you are “TurnedOn”, making it easy to eliminate distractions. </p>
+          <p>To get started, make your account using your cell-phone number, then select your interests from a drop-down menu. Our service will connect you to others in your area by adding you to text chatrooms of your different interests. From the texting chatrooms of your different interests, it’s up to you to share information, meet in person or just chat!</p>
+        </div>
+      </div>
+      <hr>
+    </div> <!-- /container -->
+
+<<<<<<< HEAD
+
+    <div class="container2" style = "height:450px">
+=======
+  <div class="col-md-6 text-left wrap_title">
+    <h2>View Groups in your community!</h2>
+    <p class="lead" style="margin-top:0">groups here<br></p>
+  </div>
+    
+    
+    <div class="jumbotron" style = "height:700px">
+>>>>>>> origin/master
+      <div id = "signscreen" class="container">
+        <h1><br>Create Account</h1>
+        <p>Create account and connect with people around you!</p>
+        <br/>
+        First Name   : <input type="text" id = "firstname" name="username" size = "50"/>
+        <br/> <br/>
+
+        <form>
+        Phone Number : <input type="text" name = "username" size = "50"/>
+<<<<<<< HEAD
+        <br/>
+        <hr/>
+        <p> select the city you live in: </p>
+          <form action="database_filename">
+          <input list="browsers">
+          <datalist id="browsers">select among this list below : <br/>
+            <select name ="Location">
+              <option value = "Providence"> "Providence" </option>
+              <option value = "New York"> "New York" </option>
+              <option value = "LA"> "LA" </option>
+              <option value = "Boston"> "Boston" </option>
+              <option value = "Chicago"> "Chicago" </option>    
+            </select>
+          </datalist> 
+          </form>
+=======
+        <br/><br/>
+        <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
+        <br/><br/>
+        </form>
+
+        <p> select the city you live in: </p>
+        select among this list below : <br/>
+        <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+              
+        </select>
+>>>>>>> FETCH_HEAD
+        <br/><br/>
+        <form>
+          Verification Code : <input type = "code" name="verificationCode"/>
+          <br/><br/>
+          <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["name"]; 
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          // var html =  "<option value="+code+">"+cityName+"</option>";
+          // document.getElementById("region").appendChild(newDiv);
+          $("#region").append(newDiv);
+        }  
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+  
+    </script>
+    <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+  
+  </body>
+</html>
