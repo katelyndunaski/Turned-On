@@ -15,7 +15,19 @@ function validate(){
 	if(num.length == 0 ){
 		alert("please enter your phone number!");
 	}
-	$.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);
+	$.ajax({
+    type: "POST",
+    data:{"userPhoneNumberToVerify":num},
+    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
+    success: function(){
+    
+        alert('horray! 200 status code!');
+    },
+
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
 /**
 	$.ajax({
     type: 'GET',
@@ -39,27 +51,14 @@ $("#signinform").submit(function (e) {
 
 
 function login(){
-	var code = document.getElementById("verify").value;
 	var num = document.getElementById("phoneNumber").value;
-
+    var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
 		return;
 	}
 	
-	$.ajax({
-    type: "POST",
-    data:{"userPhoneNumberToVerify":num},
-    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
-    success: function(){
-    
-        alert('horray! 200 status code!');
-    },
-
-    statusCode: {
-    401: function() {
-       alert('bad request');
-   	}}});
+	
 	
     $.ajax({
     type: 'POST',
