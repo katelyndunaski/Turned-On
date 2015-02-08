@@ -1,6 +1,6 @@
 var attempt = 3; // Variable to count number of attempts.
 // Below function Executes on click of login button.
-
+var num;
 var token;
 var authencookie;
 
@@ -11,64 +11,46 @@ function getcode(data){
 
 
 function validate(){
-	var num = document.getElementById("phoneNumber").value;	
+	num = document.getElementById("phoneNumber").value;	
 	if(num.length == 0 ){
 		alert("please enter your phone number!");
 	}
-	$.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);
-/**
+    console.log(num);
 	$.ajax({
-    type: 'GET',
-    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num,
-    success: function(data){
-        alert("phone worked");
+    type: "POST",
+    data:{"userPhoneNumberToVerify":num},
+    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
+    success: function(){
+        alert('horray! 200 status code!');
     },
+
     statusCode: {
     401: function() {
        alert('bad request');
-   	}}});
-**/
-
+    }}});
 }
 
 $("#signinform").submit(function (e) {
     login();
     e.preventDefault();
     return false;
-})
+});
 
 
 function login(){
-	var code = document.getElementById("verify").value;
-	var num = document.getElementById("phoneNumber").value;
-
+    var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
 		return;
-	}
-	
-	$.ajax({
-    type: 'GET',
-    url: "http://http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken/forPhoneNumber/"
-    			+document.getElementById("phoneNumber")+"/withCode/"+code,
-    success: function(data){
-        token= data.authToken;
-        alert('horray! 200 status code! token = '+ token);
-    },
-
-    statusCode: {
-    401: function() {
-       alert('bad request');
-   	}}});
-	
+    }
+	console.log(num);
     $.ajax({
     type: 'POST',
-    data:{"number":num,"securityToken":token},
+    data:{"number":num,"securityToken":code},
     url: "http://www.yosephradding.com:8000/getUserInfo",
     success: function(data){
         alert('horray! 200 status code!');
     },
-
     statusCode: {
     401: function() {
        alert('bad request');
@@ -98,8 +80,9 @@ function signupAccount(){
         data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
-        alert('horray! 200 status code! token = '+ token);
         authencookie= data.authToken;
+        localstorage.setItem("turnedOnCookie",authencookie)
+        // alert('horray! 200 status code! token = '+ authencookie);
         login_screen();
     },
 
