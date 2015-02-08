@@ -18,7 +18,7 @@ from django.shortcuts import render
 def home(request):
     """Renders the home page."""
     # import twilio.rest
-    return return render(request, 'backendStuffs/index.html', {})
+    return render(request, 'backendStuffs/index.html', {})
 
 @csrf_exempt
 def createUser(request):
