@@ -37,3 +37,14 @@
 	height: 450px;
 	background-color: LightGray;
 }
+
+#signscreen {
+	background-image:  url(jumbotron_bg.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+
+	
+
+}
