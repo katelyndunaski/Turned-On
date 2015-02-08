@@ -21,10 +21,10 @@
 }
 
 #container1{
-/*	display: block;
-*/	background-attachment: fixed !important;
+	display: block;
+	background-attachment: fixed !important;
 	background-color: LightSteelBlue ;
-	height: 350px;
+	height: 450px !important;
 	text-align: center;
 }
 
