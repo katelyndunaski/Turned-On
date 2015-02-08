@@ -11,7 +11,7 @@ function getcode(data){
 
 
 function validate(){
-	num = document.getElementById("phoneNumber").value;	
+	num = $("#phoneNumber").val();	
 	if(num.length == 0 ){
 		alert("please enter your phone number!");
 	}
