@@ -38,6 +38,7 @@ $("#signinform").submit(function (e) {
 
 
 function login(){
+    num = $("#phoneNumber").val();
     var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
@@ -47,7 +48,7 @@ function login(){
 
     $.ajax({
     type: 'POST',
-    data:{"number":num,"verificationCode":code},
+    data:{"number":$("#phoneNumber").val(),"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
         alert('1111111111111horray! 200 status code!');
@@ -79,7 +80,7 @@ function login_screen(data){
     $("body").empty();
     $("body").append(x);
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data[0]["name"] + "</p> ");
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")
