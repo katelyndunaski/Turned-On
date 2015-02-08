@@ -50,7 +50,7 @@ function login(){
     data:{"number":num,"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
-        alert('horray! 200 status code!');
+        alert('1111111111111horray! 200 status code!');
         token = data;
     },
     statusCode: {
@@ -65,7 +65,7 @@ function login(){
     data:{"number":num,"securityToken":token},
     url: "http://www.yosephradding.com:8000/getUserInfo",
     success: function(data){
-        alert('horray! 200 status code!');
+        alert('22222222222222horray! 200 status code!');
     },
     statusCode: {
     401: function() {
