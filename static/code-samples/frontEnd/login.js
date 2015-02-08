@@ -96,13 +96,13 @@ function signupAccount(){
     console.log($("#phone").val());
     $.ajax({
         type:"POST",
-        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
+        data:{"number":$("#phone").val(),"verificationCode":$("#ver").val()},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         authencookie= data.authToken;
-        localstorage.setItem("turnedOnCookie",authencookie)
-        // alert('horray! 200 status code! token = '+ authencookie);
-        login_screen();
+        localstorage.setItem("turnedOnCookie",authencookie);
+        alert('horray! 200 status code! ');
+        login_screen(data);
     },
 
     statusCode: {
@@ -124,10 +124,8 @@ function getver(){
             type: 'POST',
             data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
             url: "http://www.yosephradding.com:8000/createUser",
-            success: function(data){
-                token= data.authToken;
-                alert('horray! 200 status code! token = '+ token);
-                login_screen();
+            success: function(){
+                alert('horray! 200 status code');
             }
         // $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
         });
