@@ -31,13 +31,19 @@ def createUser(request):
 	return response
 
 @csrf_exempt
-def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
+def subscribeUserToGroup(request):
+	userPhoneNumber = request.POST.get("userPhoneNumber")
+	firstName = request.POST.get("groupName")
+	regionCode = request.POST.get("regionCode")
+	regionCode = request.POST.get("securityToken")
+
 	# TODO: check the security token.
 
-	# TODO: find a Twilio number that has not been used yet for this user for any groups.
-	twilioNumber = '4012065509'
+	# TODO: dynamically find a Twilio number that has not been used yet for this user for any groups.
+	twilioNumber = '4012164446'
 
 	myGroupMembership = UserinGroup(user = userPhoneNumber, name = groupName, region = regionCode, isOn = True, twilioNumber = twilioNumber)
+	myGroupMembership.save()
 
         response = HttpResponse()
         response.status_code = 200
