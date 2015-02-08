@@ -124,6 +124,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 @csrf_exempt
 def sendSmsVerificationCode(request):
 	userPhoneNumberToVerify = request.POST.get("userPhoneNumber")
+	print userPhoneNumberToVerify
 
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
