@@ -100,7 +100,7 @@ function signupAccount(){
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         authencookie= data.authToken;
-        localstorage.setItem("turnedOnCookie",authencookie);
+        //localstorage.setItem("turnedOnCookie",authencookie);
         alert('horray! 200 status code! ');
         login_screen(data);
     },
