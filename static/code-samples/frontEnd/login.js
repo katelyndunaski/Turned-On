@@ -80,10 +80,10 @@ function create_account(){
 }
 
 function signupAccount(){
-    $ajax({
+    $.ajax({
         type:"POST",
-        data:{"userPhoneNumber":"2063838296", "firstName":"Adam", "regionCode":"SCA"},
-        url: "http://www.yosephradding.com:8000/create",
+        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
+        url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         alert('horray! 200 status code! token = '+ token);
         authencookie= data.authToken;
@@ -97,13 +97,24 @@ function signupAccount(){
 }
 
 function getver(){
-    var num = document.getElementById("getVerNum").value; 
-    var name = document.getElementById("fistname").value;
+    num = $("#phone").val(); 
+    name = $("#firstname").val();
+    region = $("#region").val();
     if(num.length == 0 ){
         alert("please enter your phone number!");
     }else if(name.length==0){
         alert("please enter your name!");
     }else{
-        $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
+        $.ajax({
+            type: 'POST',
+            data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
+            url: "http://www.yosephradding.com:8000/createUser",
+            success: function(data){
+                token= data.authToken;
+                alert('horray! 200 status code! token = '+ token);
+                login_screen();
+            }
+        // $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
+        });
     }
 }

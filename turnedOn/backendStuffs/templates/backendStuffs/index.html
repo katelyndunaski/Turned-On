@@ -68,10 +68,10 @@
   </div>
 
 
-    <div id="container1" style="background-color:green; margin-top:-100px">
+    <div id="container1" class = "resize">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-4" style="float: right; margin-right: 50px">
+        <div class="col-md-4" style="float: center; margin-right: 50px">
           <h2>Service Description</h2>
           <p>TurnedOn is a text-based service which connects you to people in your area who share you interests. It does not require an internet connection, making it usable in remote areas and places without access to data. It also only keeps you connected while you are “TurnedOn”, making it easy to eliminate distractions. </p>
           <p>To get started, make your account using your cell-phone number, then select your interests from a drop-down menu. Our service will connect you to others in your area by adding you to text chatrooms of your different interests. From the texting chatrooms of your different interests, it’s up to you to share information, meet in person or just chat!</p>
@@ -80,49 +80,47 @@
       <hr>
     </div> <!-- /container -->
 
+<<<<<<< HEAD
     <div class="jumbotron">
+=======
+ <!--    <div class="container2" style = "height:450px">
+  <div class="col-md-6 text-left wrap_title">
+    <h2>View Groups in your community!</h2>
+    <p class="lead" style="margin-top:0">groups here<br></p>
+  </div> -->
+    
+    
+    <!--<div class="jumbotron" style = "height:800px">-->
+>>>>>>> 1f5fab090a43e463a419f575af8c1c1cd1cea8d5
       <div id = "signscreen" class="container">
         <form>
         <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br/>
-        First Name   : <input type="text" id = "firstname" name="username">
+        First Name   : <input type="text" id = "firstname" name="username" size = "50" style="color:black;"></input>
         <br/> <br/>
 
-
-        <form>        
-        <!-- <form> -->
-        Phone Number : <input type="text" name = "username">
-        <br/>
-        <hr/>
-        <p> select the city you live in: </p>
-          
-          <input list="browsers">
-          <datalist id="browsers">select among this list below : <br/>
-            <select name ="Location">
-              <option value = "Providence"> "Providence" </option>
-              <option value = "New York"> "New York" </option>
-              <option value = "LA"> "LA" </option>
-              <option value = "Boston"> "Boston" </option>
-              <option value = "Chicago"> "Chicago" </option>    
-            </select>
-          </datalist> 
-          </form>
+        <form>
+          Phone Number : <input type="text" name = "username" size = "50" style="color:black;" id = "phone"></input>
+          <br/>
+          <hr/>
+          <p> select the city you live in: </p>
+          select among this list below : <br/>
+          <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+                
+          </select>
+          <br/><br/>
+        </form>
 
         <br/><br/>
         <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
         <br/><br/>
         </form>
 
-        <p> select the city you live in: </p>
-        select among this list below : <br/>
-        <select name ="activity" id = "region">
-          <option value = "0" >please choose from below </option>
-              
-        </select>
-        <br/><br/>
+        
         <form>
-          Verification Code : <input type = "code" name="verificationCode"/>
+          Verification Code : <input type = "code" name="verificationCode" style="color:black;" id="ver">
           <br/><br/>
           <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
         </form>
