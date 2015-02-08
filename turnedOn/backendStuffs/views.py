@@ -15,25 +15,41 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+def createUser(request, userPhoneNumber, firstName, regionCode):
+	UserPhone.create(userPhoneNumber, firstName, regionCode)
+
+	response = HttpResponse()
+	response.status_code = 200
+	return response
+
 def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
-	# userPhoneNumber, groupName, regionCode, securityToken
+	# TODO: check the security token.
+
+	# TODO: find a Twilio number that has not been used yet for this user for any groups.
+	twilioNumber = '4012065509'
+
+	UserinGroup.create(userPhoneNumber, groupName, regionCode, True, twilioNumber)
+
+        response = HttpResponse()
+        response.status_code = 200
+        return response
 
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
-
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+
 	isValidToken = user.token == securityToken
+
 	if isValidToken:
-		# TODO: get these from the database for this user.
-		firstName = "Adam"
-		groupsWithStatus = {"dogs": "on", "cats": "off", "dolphins": "on"}
-		location = "San Francisco, CA"
+		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
+		firstName = user.name
+		location = user.region
 
 		return JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
 	else:
 		response = HttpResponse()
-        response.status_code = 401
-        return response
+		response.status_code = 401
+		return response
 
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
@@ -41,12 +57,11 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumb
 
 	# This token should have an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
-	
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user.token = newMagicTokenForThisUser
+	user.save()
 
 	if isValidCode:
-		user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
-		user.token = newMagicTokenForThisUser
-		user.save()
 		return JsonResponse({"authToken": newMagicTokenForThisUser})
 	else:
 		response = HttpResponse()
