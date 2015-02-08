@@ -64,6 +64,16 @@
         <button onclick="create_account()" type="button"  class="btn btn-primary btn-lg">Don't have account? Create one! </button>
         <br/>
       </div>
+      
+          <div id="regionDiv" style="display: none;">
+			<select name ="activity" id = "region" onchange="onCityWasChanged(this);">
+				<option value = "0" >please choose from below </option>
+			</select>
+          </div>     
+
+			<div id="divOfAllGroups">
+			
+			</div>
     </div>
   </div>
 
@@ -102,15 +112,7 @@
           <hr/>
           <p> select the city you live in: </p>
           select among this list below : <br/>
-          <div>
-			<select name ="activity" id = "region" onchange="onCityWasChanged(this);">
-				<option value = "0" >please choose from below </option>
-			</select>
-          </div>     
 
-			<div id="divOfAllGroups">
-			
-			</div>
 
           <br/>
         </form>
@@ -134,28 +136,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
-    var code;
-    var cityName;
-    $.ajax({
-    type: 'GET',
-    url: "http://yosephradding.com:8000/giveMeRegions/",
-    success: function(data){
-        for(i = 0, len= data.length; i < len; i++){
-          var newDiv=document.createElement('option');
-          code = data[i]["code"];
-          cityName = data[i]["name"]; 
-          $(newDiv).attr("value",code);
-          $(newDiv).append(cityName);
-          // var html =  "<option value="+code+">"+cityName+"</option>";
-          // document.getElementById("region").appendChild(newDiv);
-          $("#region").append(newDiv);
-        }  
-    },
-    statusCode: {
-    401: function() {
-       alert('bad request');
-    }}});
-
     $('.resize').css('height',screen.height-51);
     $('.resive').css('width',screen.width);
     </script>

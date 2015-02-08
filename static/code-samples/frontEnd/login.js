@@ -87,6 +87,29 @@ function login_screen(data){
     // $("#container3").empty();
     // $("jumbotron")
     
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["name"]; 
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          // var html =  "<option value="+code+">"+cityName+"</option>";
+          // document.getElementById("region").appendChild(newDiv);
+          $("#region").append(newDiv);
+        }
+        
+        $("#regionDiv").show();
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
 }
 
 function create(data1, data2){
@@ -155,11 +178,13 @@ function handleGroupOnOff(theGroupCheckbox)
     	num = $("#phoneNumber").val();
     }
     
+    var theGroupName = theGroupCheckbox.value;
+    
 	// The user just turned this group on or off.
 	$.ajax({
 		type: 'POST',
 	    url: urlToHit,
-	    data: { userPhoneNumber: num, groupName: theGroupCheckbox.value, securityToken: token },
+	    data: { userPhoneNumber: num, groupName: theGroupName, securityToken: token },
 	    success: function(data)
 	    {
 			// Nothing to do except celebrate.
