@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Turned ON</a>
+          <a class="navbar-brand" href="#"><b>Turned ON</b></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <div id = "tobereplaced">
@@ -41,7 +41,7 @@
             <div class="form-group">
               <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
             </div>
-            <button id="signin"  onclick="login()" type="submit" class="btn btn-success">Sign in</button>
+            <button id="signin"  onclick="login()" type="button" class="btn btn-success">Sign in</button>
           </form>
           <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -76,13 +76,66 @@
       <hr>
     </div> <!-- /container -->
 
+<<<<<<< HEAD
+=======
+    <div class="jumbotron" style = "height:700px">
+      <div id = "signscreen" class="container">
+        <h1>Create Account</h1>
+        <p>Create account and connect with people around you!</p>
+        <br/><hr/>
+        First Name : <input type="text" name = "username" size = "50"/>
+        <br/> <br/>
+        Phone Number : <input type="text" name = "username" size = "50"/>
+        <br/> <br/>
+        <p> select the city you live in: </p>
+        <hr/>
+        select among this list below : <br/>
+        <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+              
+        </select>
+        <br/><br/>
+        <form action="database_filename" method = "get" >
+          <input type="submit" value = "Create Account" />
+          <br/> <br/>
+          Verification Code : <input type = "password" name="password"/>
+          <br/>
+          <input type="submit" value = "Create Account" />
+        </form>
+
+      </div>
+    </div>
+
+>>>>>>> da3077ae216b2fc9bbb835d0025eb695353fe362
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
-
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        alert("creating drop down menu");
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["name"]; 
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          // var html =  "<option value="+code+">"+cityName+"</option>";
+          // document.getElementById("region").appendChild(newDiv);
+          $("#region").append(newDiv);
+        }  
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+  
     </script>
     <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
   

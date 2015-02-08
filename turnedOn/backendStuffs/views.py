@@ -124,9 +124,9 @@ def sendSmsVerificationCode(request):
 
 	verificationCode = "{0:04d}".format(randint(0,9999))
 
-        user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
-        user.verificationNumber = verificationCode
-        user.save()
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user.verificationNumber = verificationCode
+	user.save()
 
 	client.messages.create(
 		to=userPhoneNumberToVerify,
@@ -145,32 +145,42 @@ def giveMeRegions(request):
 @csrf_exempt
 def relayMessageToGroup(request):
 	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
+	toNumber = request.POST.get("toNumber")
+	post = request.POST.get("post")
+	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
+	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
-# def contact(request):
-#     """Renders the contact page."""
+	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
+	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
 
-#     assert isinstance(request, HttpRequest)
-#     return render(
-#         request,
-#         'app/contact.html',
-#         context_instance = RequestContext(request,
-#         {
-#             'title':'Contact',
-#             'message':'Your contact page.',
-#             'year':datetime.now().year,
-#         })
-#     )
+	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+	for i in groupList:
+		client.messages.create(
+			to=i.phone_number,
+			from_=toNumber,
+			body=post,
+		)
 
-# def about(request):
-#     """Renders the about page."""
-#     assert isinstance(request, HttpRequest)
-#     return render(
-#         request,
-#         'app/about.html',
-#         context_instance = RequestContext(request,
-#         {
-#             'title':'About',
-#             'message':'Your application description page.',
-#             'year':datetime.now().year,
-#         })
-#     )
+	response = HttpResponse()
+	response.status_code = 200
+	return response
+
+@csrf_exempt
+def getGroupsInArea(request):
+	area = request.GET.get("region")
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
+	print user
+	authToken = request.GET.get("securityToken")
+	if  int(user.token) != int(authToken):
+		response = HttpResponse()
+		response.status_code = 401
+		return response
+	# response = []
+	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region").distinct())
+	print allUserGroups
+	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
+		i[isOn] = False
+		allUserGroups.append(i)
+	return JsonResponse(allUserGroups, safe = False)
+
+
