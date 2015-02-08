@@ -51,7 +51,16 @@ function login(){
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
         alert('1111111111111horray! 200 status code!');
-        window.token = data;
+        token = data.authToken;
+        $.ajax({
+            type: 'POST',
+            data:{"number":num,"securityToken":token},
+            url: "http://www.yosephradding.com:8000/getUserInfo",
+            success: function(data){
+                alert('22222222222222horray! 200 status code!');
+                login_screen(data);
+            }
+        })
 
     },
     statusCode: {
@@ -60,19 +69,6 @@ function login(){
     }}});
 
     console.log(window.token);
-    $.ajax({
-    type: 'POST',
-    data:{"number":num,"securityToken":token},
-    url: "http://www.yosephradding.com:8000/getUserInfo",
-    success: function(data){
-        alert('22222222222222horray! 200 status code!');
-        login_screen(data);
-    },
-    statusCode: {
-    401: function() {
-       alert('bad request');
-    }}});
-
 
 	return;	
 }
