@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^getUserInfo', 'backendStuffs.views.getUserInfo', name='getUserInfo'),
     url(r'^create', 'backendStuffs.views.createUser', name='create'),
     url(r'^subscribeUserToGroup', 'backendStuffs.views.subscribeUserToGroup', name='subscribeUserToGroup'),
-    url(r'^giveMeRegions', 'backendStuffs.views.giveMeRegions', name='giveMeRegions')
+    url(r'^giveMeRegions', 'backendStuffs.views.giveMeRegions', name='giveMeRegions'),
+    url(r'^getGroupsInArea', 'backendStuffs.views.getGroupsInArea', name='getGroupsInArea'),
 )
 
