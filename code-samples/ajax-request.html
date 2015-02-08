@@ -8,19 +8,20 @@
 	
 	<script type="text/javascript">
 
-	var data = [{userid:"bird", status:"on"},{userid:"katelyns", status:"on"},{userid:"soccer", status:"off"},];
+	var data = [{userid:"bird", status:"on"},{userid:"katelyn", status:"on"},{userid:"soccer", status:"off"},];
 	var VarUserid = "";
 	var VarStatus = "";
 	
 		function whatToDoIfAjaxCallSucceeded(data)
 		{
 			var items = [];
+			//i=0;
 			for (i = 0, len= data.length; i < len; i++)
 			{ 
-			  ValUserid = data[i]["userid"];
-			  ValStatus = data[i]["status"];
-			  $.each( data, function useriddataFromTheServerWillGoHere(ValUserid, Val) {
-			    items.push( "<li id='" + ValUserid + "'>" + ValStatus + "</li>" );
+			  ValUserid = data[i].userid;
+			  ValStatus = data[i].status;
+			  $.each( data, function(ValUserid, ValStatus) {
+			    items.push( "<td id='" + ValUserid + "'>" + ValUserid + "</td>" );
 			  });
 			}
 			  $( "<ul/>", {
