@@ -14,6 +14,9 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
+	
+
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# TODO: need to check the provided token against the value stored in the database for that phone number.
 	# Make sure it's not expired.
