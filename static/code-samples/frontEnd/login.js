@@ -44,9 +44,25 @@ function login(){
 		return;
     }
 	console.log(num);
+
     $.ajax({
     type: 'POST',
-    data:{"number":num,"securityToken":code},
+    data:{"number":num,"verificationCode":code},
+    url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
+    success: function(data){
+        alert('horray! 200 status code!');
+        token = data;
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+
+
+
+    $.ajax({
+    type: 'POST',
+    data:{"number":num,"securityToken":token},
     url: "http://www.yosephradding.com:8000/getUserInfo",
     success: function(data){
         alert('horray! 200 status code!');
