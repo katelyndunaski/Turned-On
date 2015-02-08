@@ -93,7 +93,7 @@ function signupAccount(){
     statusCode: {
     401: function() {
        alert('bad request');
-    });
+    }}});
 }
 
 function getver(){
