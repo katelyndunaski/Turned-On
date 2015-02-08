@@ -15,6 +15,9 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
+	
+
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
 
@@ -36,8 +39,11 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumb
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	isValidCode = True
 
-	# TODO: this code should be stored in the database with an expiration time.
+	# This token should have an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user.token = newMagicTokenForThisUser
+	user.save()
 
 	if isValidCode:
 		return JsonResponse({"authToken": newMagicTokenForThisUser})
