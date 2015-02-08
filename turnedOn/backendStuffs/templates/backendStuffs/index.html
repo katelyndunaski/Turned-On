@@ -97,35 +97,24 @@
         <br/> <br/>
 
         <form>
-        Phone Number : <input type="text" name = "username" size = "50" style="color:black;"/>
-        <br/>
-        <hr/>
-        <p> select the city you live in: </p>
-          
-          <input list="browsers">
-          <datalist id="browsers">select among this list below : <br/>
-            <select name ="Location">
-              <option value = "Providence"> "Providence" </option>
-              <option value = "New York"> "New York" </option>
-              <option value = "LA"> "LA" </option>
-              <option value = "Boston"> "Boston" </option>
-              <option value = "Chicago"> "Chicago" </option>    
-            </select>
-          </datalist> 
-          </form>
+          Phone Number : <input type="text" name = "username" size = "50" style="color:black;"/>
+          <br/>
+          <hr/>
+          <p> select the city you live in: </p>
+          select among this list below : <br/>
+          <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+                
+          </select>
+          <br/><br/>
+        </form>
 
         <br/><br/>
         <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
         <br/><br/>
         </form>
 
-        <p> select the city you live in: </p>
-        select among this list below : <br/>
-        <select name ="activity" id = "region">
-          <option value = "0" >please choose from below </option>
-              
-        </select>
-        <br/><br/>
+        
         <form>
           Verification Code : <input type = "code" name="verificationCode" style="color:black;">
           <br/><br/>
