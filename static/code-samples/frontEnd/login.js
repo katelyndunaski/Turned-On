@@ -48,12 +48,12 @@ function login(){
 	}
 	
 	$.ajax({
-    type: 'GET',
-    url: "http://http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken/forPhoneNumber/"
-    			+document.getElementById("phoneNumber")+"/withCode/"+code,
-    success: function(data){
-        token= data.authToken;
-        alert('horray! 200 status code! token = '+ token);
+    type: "POST",
+    data:{"userPhoneNumberToVerify":num},
+    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
+    success: function(){
+    
+        alert('horray! 200 status code!');
     },
 
     statusCode: {
