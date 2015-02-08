@@ -127,3 +127,27 @@ function getver(){
         });
     }
 }
+
+function handleGroupOnOff(theGroupCheckbox)
+{
+	var urlToHit = theGroupCheckbox.checked ? "http://yosephradding.com:8000/subscribeUserToGroup" : "http://yosephradding.com:8000/unsubscribeUserFromGroup";
+    
+	// The user just turned this group on or off.
+	$.ajax({
+		type: 'POST',
+	    url: urlToHit,
+	    data: { userPhoneNumber: num = $("#phone").val(), groupName: theGroupCheckbox.value, securityToken: token }
+	    success: function(data)
+	    {
+			// Nothing to do except celebrate.
+	    },
+	    statusCode:
+	    {
+	    	401: function()
+	    	{
+	    	   alert('not authorized');
+	    	}
+		}
+	});
+}
+    
