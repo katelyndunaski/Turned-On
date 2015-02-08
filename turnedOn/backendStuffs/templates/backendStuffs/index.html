@@ -86,13 +86,13 @@
         <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br/>
-        First Name   : <input type="text" id = "firstname" name="username">
+        First Name   : <input type="text" id = "firstname" placeholder="Frst Name" class="form-control">
         <br/> <br/>
 
 
         <form>        
         <!-- <form> -->
-        Phone Number : <input type="text" name = "username">
+        Phone Number : <input type="text" id = "username" placeholder="username" class="form-control">
         <br/>
         <hr/>
         <p> select the city you live in: </p>
@@ -107,25 +107,12 @@
               <option value = "Chicago"> "Chicago" </option>    
             </select>
           </datalist> 
-          </form>
 
         <br/><br/>
         <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
         <br/><br/>
         </form>
 
-        <p> select the city you live in: </p>
-        select among this list below : <br/>
-        <select name ="activity" id = "region">
-          <option value = "0" >please choose from below </option>
-              
-        </select>
-        <br/><br/>
-        <form>
-          Verification Code : <input type = "code" name="verificationCode"/>
-          <br/><br/>
-          <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
-        </form>
 
       </div>
     </div>
