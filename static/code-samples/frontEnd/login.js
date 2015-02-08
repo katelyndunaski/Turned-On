@@ -97,13 +97,24 @@ function signupAccount(){
 }
 
 function getver(){
-    var num = document.getElementById("getVerNum").value; 
-    var name = document.getElementById("fistname").value;
+    var num = $("#phone").val(); 
+    var name = $("#fistname").val();
+    var region = $("#region").val();
     if(num.length == 0 ){
         alert("please enter your phone number!");
     }else if(name.length==0){
         alert("please enter your name!");
     }else{
-        $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
+        $.ajax({
+            type: 'POST',
+            data:{"userPhoneNumber":num,"firstName":name,"regionCode":region}
+            url: "http://http://www.yosephradding.com:8000/createUser",
+            success: function(data){
+                token= data.authToken;
+                alert('horray! 200 status code! token = '+ token);
+                login_screen();
+            }
+        // $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
+        });
     }
 }
