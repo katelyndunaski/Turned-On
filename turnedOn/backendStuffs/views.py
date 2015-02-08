@@ -98,8 +98,8 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 
 	isValidCode = int(user.verificationNumber) == int(verificationCode)
 
-        # TODO: This token should have an expiration time.
-    newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
+    # TODO: This token should have an expiration time.
+	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user.token = newMagicTokenForThisUser
 	user.save()
 
