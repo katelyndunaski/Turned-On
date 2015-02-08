@@ -63,9 +63,9 @@ def subscribeUserToGroup(request):
 		body="Welcome to the {0} group! Here is where you will see all posts pertain to this group.Reply to create Post".format(groupName),
 	)
 
-    response = HttpResponse()
-    response.status_code = 200
-    return response
+	response = HttpResponse()
+	response.status_code = 200
+	return response
 
 @csrf_exempt
 def getUserInfo(request):
