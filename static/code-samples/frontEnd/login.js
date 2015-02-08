@@ -76,7 +76,7 @@ function login_screen(){
 }
 
 function create_account(){
-    window.scrollBy(0,1000); // horizontal and vertical scroll increments
+    window.scrollBy(0,3000); // horizontal and vertical scroll increments
 }
 
 function signupAccount(){
