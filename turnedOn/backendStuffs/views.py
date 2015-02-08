@@ -140,7 +140,7 @@ def sendSmsVerificationCode(request):
 
 @csrf_exempt
 def giveMeRegions(request):
-	return(JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices]), safe = False)
+	return(JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices], safe = False))
 
 @csrf_exempt
 def relayMessageToGroup(request):
