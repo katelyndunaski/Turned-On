@@ -4,7 +4,7 @@ Definition of views.
 
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.template import RequestContext
+from django.template import RequestContext, loader
 from datetime import datetime
 from random import randint
 from backendStuffs.models import *
