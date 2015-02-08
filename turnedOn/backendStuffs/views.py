@@ -168,7 +168,7 @@ def relayMessageToGroup(request):
 @csrf_exempt
 def getGroupsInArea(request):
 	area = request.GET.get("region")
-	user = UserPhone.object.get(phone_number = request.GET.get("phoneNumber"))
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
 	authToken = request.GET.get("securityToken")
 	if  int(user.token) != int(authToken):
 		response = HttpResponse()
