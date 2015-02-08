@@ -19,8 +19,10 @@ def home(request):
 
 @csrf_exempt
 def createUser(request):
-	# request.
-	f = UserPhone(userPhoneNumber, firstName, regionCode)
+	phoneNumber = request.POST.get("number")
+	firstName = request.POST.get("number")
+	regionCode = request.POST.get("regionCode")
+	f = UserPhone(phone_number = userPhoneNumber, firstName, regionCode)
 
 	response = HttpResponse()
 	response.status_code = 200
@@ -40,7 +42,7 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
         return response
 
 @csrf_exempt
-def getUserInfo(request, userPhoneNumberToVerify, securityToken):
+def getUserInfo(request):
 	# Make sure it's not expired.
 	userPhoneNumberToVerify = request.POST.get("number")
 	securityToken = request.POST.get("securityToken")
