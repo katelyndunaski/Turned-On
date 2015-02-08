@@ -16,5 +16,4 @@ urlpatterns = patterns('',
     url(r'^getGroupsInArea', 'backendStuffs.views.getGroupsInArea', name='getGroupsInArea'),
     url(r'^relay', 'backendStuffs.views.relayMessageToGroup', name='relayMessageToGroup'),
 )
-)
 
