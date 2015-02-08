@@ -82,13 +82,18 @@
       <div id = "signscreen" class="container">
         <h1>Create Account</h1>
         <p>Create account and connect with people around you!</p>
-        <br/><hr/>
-        First Name : <input type="text" name = "username" size = "50"/>
+        <br/>
+        First Name   : <input type="text" name = "username" size = "50"/>
         <br/> <br/>
+
+        <form action="database_filename" method = "get" >
         Phone Number : <input type="text" name = "username" size = "50"/>
-        <br/> <br/>
+        <br/><br/>
+        <input type="submit" value = "Get Verification Code" />
+        <br/><br/>
+        </form>
+
         <p> select the city you live in: </p>
-        <hr/>
         select among this list below : <br/>
         <select name ="activity" id = "region">
           <option value = "0" >please choose from below </option>
@@ -96,8 +101,6 @@
         </select>
         <br/><br/>
         <form action="database_filename" method = "get" >
-          <input type="submit" value = "Create Account" />
-          <br/> <br/>
           Verification Code : <input type = "password" name="password"/>
           <br/>
           <input type="submit" value = "Create Account" />
@@ -119,7 +122,6 @@
     type: 'GET',
     url: "http://yosephradding.com:8000/giveMeRegions/",
     success: function(data){
-        alert("creating drop down menu");
         for(i = 0, len= data.length; i < len; i++){
           var newDiv=document.createElement('option');
           code = data[i]["code"];
