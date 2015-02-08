@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="login.js"></script>
+
     <title>Turned ON</title>
 
     <!-- Bootstrap core CSS -->
@@ -37,11 +37,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <div id = "tobereplaced">
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" id="signinform">
             <div class="form-group">
               <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
             </div>
-            <button id="signin"  onclick="login()" type="submit" class="btn btn-success">Sign in</button>
+            <button id="signin"  type="submit" class="btn btn-success">Sign in</button>
           </form>
           <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -56,7 +56,7 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <div class="container">
+      <div id = "replaceAfterLogin1" class="container">
         <h1>Hello!</h1>
         <p>Turn on is a platform where you can connect with people with same interests around you!</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
@@ -84,6 +84,7 @@
 
     </script>
     <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="login.js"></script>
   
   </body>
 </html>
