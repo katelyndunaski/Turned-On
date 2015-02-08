@@ -19,7 +19,7 @@ class UserPhone(models.Model):
 class UserinGroup(models.Model):
 	global regionChoices
 	region = models.CharField(choices = regionChoices, max_length = 3)
-	user = models.ForeignKey(UserPhone,blank=True)
+	user = models.ForeignKey(UserPhone,blank=True, null = True)
 	name = models.CharField(max_length = 500)
 	description = models.TextField(null = True)
 	isOn = models.BooleanField(default=True)
