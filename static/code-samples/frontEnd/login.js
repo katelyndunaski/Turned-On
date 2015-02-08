@@ -38,6 +38,7 @@ $("#signinform").submit(function (e) {
 
 
 function login(){
+    num = $("#phoneNumber").val();
     var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
@@ -47,19 +48,18 @@ function login(){
 
     $.ajax({
     type: 'POST',
-    data:{"number":$("#phoneNumber").val(),"verificationCode":$("#verify").val()},
+    data:{"number":$("#phoneNumber").val(),"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
         alert('1111111111111horray! 200 status code!');
         token = data.authToken;
-        localstorage.setItem("turnedOnCookie",authencookie)
         $.ajax({
             type: 'POST',
             data:{"number":num,"securityToken":token},
             url: "http://www.yosephradding.com:8000/getUserInfo",
             success: function(data){
                 alert('22222222222222horray! 200 status code!');
-                login_screen(data,num);
+                login_screen(data);
             }
         })
 
@@ -74,22 +74,30 @@ function login(){
 	return;	
 }
 
-function login_screen(data,num){
-    $("#signscreen").empty();
-    $("#container1").empty();
-    $("#container1").css("background-color:#C8C8C8");
-    $("#signscreen").css("background-color:#33CC66");
 
-    $.ajax({
-        type: 'POST',
-        data:{"region":$("#region").val(),"phoneNumber":num,"securityToken":token},
-        url: "http://www.yosephradding.com:8000/getGroupsInArea",
-        success: function(data){
-            alert('22222222222222horray! 200 status code!');
-            //Do things with the things yo.
-        }
-    });
+function login_screen(data){
+	// alert("adfasdfs");
+    x = $("nav");
+    $("body").empty();
+    $("body").append(x);
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
     
+    // $("#signscreen").empty();
+    // $("#container3").empty();
+    // $("jumbotron")
+    
+}
+
+function create(data1, data2){
+     $.ajax({
+        type:"POST",
+        data:{"token":data1,"name":data2},
+        url: "http://www.yosephradding.com:8000/createGroup",
+        success: function(data){
+            // relaod table
+    }});
+
 }
 
 function create_account(){
@@ -100,14 +108,13 @@ function signupAccount(){
     console.log($("#phone").val());
     $.ajax({
         type:"POST",
-        data:{"number":$("#phone").val(),"verificationCode":$("#ver").val()},
+        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         authencookie= data.authToken;
-        localStorage.setItem("turnedOnCookie",authencookie);
-        //localStorage.setItem('favoriteflavor','vanilla');
-        alert('horray! 200 status code! ');
-        login_screen(data);
+        localStorage.setItem("turnedOnCookie",authencookie)
+        // alert('horray! 200 status code! token = '+ authencookie);
+        login_screen();
     },
 
     statusCode: {
@@ -129,10 +136,36 @@ function getver(){
             type: 'POST',
             data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
             url: "http://www.yosephradding.com:8000/createUser",
-            success: function(){
-                alert('horray! 200 status code');
+            success: function(data){
+                token= data.authToken;
+                alert('horray! 200 status code! token = '+ token);
+                login_screen();
             }
         // $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
         });
     }
 }
+
+function handleGroupOnOff(theGroupCheckbox)
+{
+	var urlToHit = theGroupCheckbox.checked ? "http://yosephradding.com:8000/subscribeUserToGroup" : "http://yosephradding.com:8000/unsubscribeUserFromGroup";
+    
+	// The user just turned this group on or off.
+	$.ajax({
+		type: 'POST',
+	    url: urlToHit,
+	    data: { userPhoneNumber: num = $("#phone").val(), groupName: theGroupCheckbox.value, securityToken: token },
+	    success: function(data)
+	    {
+			// Nothing to do except celebrate.
+	    },
+	    statusCode:
+	    {
+	    	401: function()
+	    	{
+	    	   alert('not authorized');
+	    	}
+		}
+	});
+}
+    

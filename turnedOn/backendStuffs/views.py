@@ -10,7 +10,6 @@ from random import randint
 from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
 
 
 
@@ -154,15 +153,20 @@ def sendSmsVerificationCode(request):
 
 @csrf_exempt
 def giveMeRegions(request):
-	return(JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices], safe = False))
+	myResponse = JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices], safe = False)
+	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
+	return myResponse
 
 @csrf_exempt
 def relayMessageToGroup(request):
-	print request.POST.get("From")
-	user = UserPhone.objects.get(phone_number = request.POST.get("From"))
+	print request.POST.get("From")[2:]
+	thing = request.POST.get("From")[2:]
+	user = UserPhone.objects.get(phone_number = thing)
+	print ""
+	print "Hey"
 	toNumber = request.POST.get("To")
 	post = request.POST.get("Body")
-	group = UserinGroup.objects.filter(region = user.region).get(user = user)#.filter(twilioNumber = toNumber).get(user = user)
+	group = UserinGroup.objects.filter(region = user.region).get(user = user)
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
@@ -183,20 +187,25 @@ def relayMessageToGroup(request):
 
 @csrf_exempt
 def getGroupsInArea(request):
-	area = request.POST.get("region")
-	user = UserPhone.POST.get(phone_number = request.GET.get("phoneNumber"))
+	area = request.GET.get("region")
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
 	print user
-	authToken = request.POST.get("securityToken")
-	if  int(user.token) != int(authToken):
-		response = HttpResponse()
-		response.status_code = 401
-		return response
-	response = []
+
+	# This is a public API, so no need for security check.
+	# authToken = request.GET.get("securityToken")
+	# if  int(user.token) != int(authToken):
+	# 	response = HttpResponse()
+	# 	response.status_code = 401
+	# 	return response
+	# response = []
 	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region").distinct())
 	print allUserGroups
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
 		i["isOn"] = False
 		allUserGroups.append(i)
-	return render(request, 'backendStuffs/templatForTable.html',{"listi":allUserGroups})
 
-
+	t = loader.get_template('backendStuffs/templatForTable.html')
+	c = RequestContext(request, {"listi":allUserGroups})
+	myResponse = HttpResponse(t.render(c), content_type="application/xhtml+xml")
+	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
+	return myResponse

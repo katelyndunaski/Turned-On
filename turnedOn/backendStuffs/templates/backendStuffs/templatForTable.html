@@ -1,9 +1,9 @@
 {%for i in listi%}
 	<tr>
 		{%if i.isOn%}
-			<td><input type="checkbox" name="checkedBox" value="{{i.name}}" checked></td>
+			<td><input type="checkbox" name="checkedBox" value="{{i.name}}" checked onclick="handleGroupOnOff(this);"></td>
 		{%else%}
-			<td><input type="checkbox" name="checkedBox" value="{{i.name}}"></td>
+			<td><input type="checkbox" name="checkedBox" value="{{i.name}}" onclick="handleGroupOnOff(this);"></td>
 		{%endif%}
 			<td>{{i.name}}</td>
 	</tr>
