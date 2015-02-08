@@ -39,7 +39,7 @@ def subscribeUserToGroup(request):
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumber)
 
-	isValidToken = int(user.token) == int(securityToken)
+	isValidToken = int(user.token) == int(regionCode)
 	if not isValidToken:
 		response = HttpResponse()
 		response.status_code = 401
