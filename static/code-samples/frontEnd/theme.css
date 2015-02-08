@@ -46,7 +46,7 @@
 	color: #f8f8f8;
 	background: url(jumbotron_bg.jpg) no-repeat fixed;
 	background-size: cover;
-	text-align: center;
+	text-align: left;
 }
 
 form > *{
