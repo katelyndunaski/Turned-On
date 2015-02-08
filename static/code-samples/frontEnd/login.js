@@ -80,7 +80,7 @@ function login_screen(data){
     $("body").empty();
     $("body").append(x);
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data[0]["name"] + "</p> ");
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")

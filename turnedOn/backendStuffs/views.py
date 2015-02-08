@@ -166,7 +166,7 @@ def relayMessageToGroup(request):
 	print "Hey"
 	toNumber = request.POST.get("To")
 	post = request.POST.get("Body")
-	group = UserinGroup.objects.filter(region = user.region).get(user = user)#.filter(twilioNumber = toNumber).get(user = user)
+	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
