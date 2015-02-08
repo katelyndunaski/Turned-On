@@ -69,8 +69,6 @@ function login(){
        alert('bad request');
     }}});
 
-    console.log(window.token);
-
 	return;	
 }
 
@@ -82,7 +80,7 @@ function login_screen(data){
     $("body").append(x);
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
-    string = "<form><input type = 'text' id='nooo'></input><button onclick='create($(localStorage.getItem('turnedOnCookie'),$('#noooo').val())'>Submit</button></form>";
+    string = "<form style = 'margin-top=100px; margin-left=100px;'><input type = 'text' id='nooo' style = 'color:black;'></input><button onclick='create($(localStorage.getItem('turnedOnCookie'),$('#noooo').val())'>Submit</button></form>";
     $("body").append(string);
     // $("#signscreen").empty();
     // $("#container3").empty();
