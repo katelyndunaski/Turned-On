@@ -113,7 +113,9 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	user.save()
 
 	if isValidCode:
-		return JsonResponse({"authToken": newMagicTokenForThisUser})
+		response = JsonResponse({"authToken": newMagicTokenForThisUser})
+		response.__setitem__("Access-Control-Allow-Origin", "*")
+		return response
 	else:
 		response = HttpResponse()
 		response.status_code = 401
