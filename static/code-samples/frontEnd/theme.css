@@ -39,12 +39,14 @@
 }
 
 #signscreen {
-	background-image:  url(jumbotron_bg.jpg);
-	background-repeat: no-repeat;
+	position: relative;
 	background-attachment: fixed;
+	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+	padding-bottom: 50px;
+	color: #f8f8f8;
+	background: url(jumbotron_bg.jpg) no-repeat fixed;
 	background-size: cover;
-	background-position: center;
-	margin:0;
+	text-align: center;
 }
 
 form > *{
