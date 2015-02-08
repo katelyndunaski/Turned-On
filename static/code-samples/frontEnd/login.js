@@ -98,8 +98,9 @@ function signupAccount(){
         data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
-        alert('horray! 200 status code! token = '+ token);
         authencookie= data.authToken;
+        localstorage.setItem("turnedOnCookie",authencookie)
+        // alert('horray! 200 status code! token = '+ authencookie);
         login_screen();
     },
 
