@@ -92,6 +92,7 @@ function create_account(){
 }
 
 function signupAccount(){
+    console.write($("#phone").val());
     $.ajax({
         type:"POST",
         data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},

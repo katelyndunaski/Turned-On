@@ -99,6 +99,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	userPhoneNumberToVerify = request.POST.get("number")
 	verificationCode = request.POST.get("verificationCode")
 
+	print userPhoneNumberToVerify
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidCode = int(user.verificationNumber) == int(verificationCode)
