@@ -47,18 +47,19 @@ function login(){
 
     $.ajax({
     type: 'POST',
-    data:{"number":num,"verificationCode":code},
+    data:{"number":$("#phoneNumber").val(),"verificationCode":$("#verify").val()},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
         alert('1111111111111horray! 200 status code!');
         token = data.authToken;
+        localstorage.setItem("turnedOnCookie",authencookie)
         $.ajax({
             type: 'POST',
             data:{"number":num,"securityToken":token},
             url: "http://www.yosephradding.com:8000/getUserInfo",
             success: function(data){
                 alert('22222222222222horray! 200 status code!');
-                login_screen(data);
+                login_screen(data,num);
             }
         })
 
@@ -73,12 +74,17 @@ function login(){
 	return;	
 }
 
-function login_screen(data){
+function login_screen(data,num){
 	// alert("adfasdfs");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data[0]["name"] + "</p> ");
-    $("#signscreen").empty();
-    $("#container3").empty();
+    $.ajax({
+        type: 'POST',
+        data:{"region":$("#region").val(),"phoneNumber":num,"securityToken":token},
+        url: "http://www.yosephradding.com:8000/getGroupsInArea",
+        success: function(data){
+            alert('22222222222222horray! 200 status code!');
+            //Do things with the things yo.
+        }
+    })
     
 }
 
@@ -90,13 +96,14 @@ function signupAccount(){
     console.log($("#phone").val());
     $.ajax({
         type:"POST",
-        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
+        data:{"number":$("#phone").val(),"verificationCode":$("#ver").val()},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         authencookie= data.authToken;
-        localstorage.setItem("turnedOnCookie",authencookie)
-        // alert('horray! 200 status code! token = '+ authencookie);
-        login_screen();
+        localStorage.setItem("turnedOnCookie",authencookie);
+        //localStorage.setItem('favoriteflavor','vanilla');
+        alert('horray! 200 status code! ');
+        login_screen(data);
     },
 
     statusCode: {
@@ -118,10 +125,8 @@ function getver(){
             type: 'POST',
             data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
             url: "http://www.yosephradding.com:8000/createUser",
-            success: function(data){
-                token= data.authToken;
-                alert('horray! 200 status code! token = '+ token);
-                login_screen();
+            success: function(){
+                alert('horray! 200 status code');
             }
         // $.get("http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num, getcode);    
         });
