@@ -34,8 +34,7 @@ def createUser(request):
 def subscribeUserToGroup(request):
 	userPhoneNumber = request.POST.get("userPhoneNumber")
 	firstName = request.POST.get("groupName")
-	regionCode = request.POST.get("regionCode")
-	regionCode = request.POST.get("securityToken")
+	securityToken = request.POST.get("securityToken")
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumber)
 
@@ -48,7 +47,7 @@ def subscribeUserToGroup(request):
 	# TODO: dynamically find a Twilio number that has not been used yet for this user for any groups.
 	twilioNumber = '4012164446'
 
-	myGroupMembership = UserinGroup(user = user, name = groupName, region = regionCode, isOn = True, twilioNumber = twilioNumber)
+	myGroupMembership = UserinGroup(user = user, name = groupName, region = user.region, isOn = True, twilioNumber = twilioNumber)
 	myGroupMembership.save()
 
         response = HttpResponse()
