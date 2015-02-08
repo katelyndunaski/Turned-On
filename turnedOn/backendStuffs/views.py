@@ -52,7 +52,7 @@ def getUserInfo(request):
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
-	isValidToken = user.token == securityToken
+	isValidToken = int(user.token) == int(securityToken)
 
 	if isValidToken:
 		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
@@ -72,7 +72,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
-	isValidCode = user.verificationNumber == verificationCode
+	isValidCode = int(user.verificationNumber) == int(verificationCode)
 
         # TODO: This token should have an expiration time.
         newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
