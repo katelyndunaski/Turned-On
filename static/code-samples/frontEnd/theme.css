@@ -2,7 +2,7 @@
 	display : inline;
 }
 #container3{
-	background: url(jumbotron_bg.jpg) no-repeat center center;
+	background: url(jumbotron_bg.jpg) no-repeat;
 }
 #phoneNum{
 	display:inline;
