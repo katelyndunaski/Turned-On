@@ -89,37 +89,35 @@
     
     <!--<div class="jumbotron" style = "height:800px">-->
       <div id = "signscreen" class="container">
-        <form action="#">
+        <form>
         <h1>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br>
-        <input type="text" placeholder="First Name" name="username" id="username" style="color:black !important;" ></input>
+        <input type="text" placeholder="First Name" name="username"></input>
         <br>
 
         <form>
-          <input type="text" placeholder="Phone Number" name = "phone" id="phone" style="color:black !important;" ></input>
+          <input type="text" placeholder="Phone Number" name = "username"></input>
           <br/>
           <hr/>
           <p> select the city you live in: </p>
           select among this list below : <br/>
-
           <div>
-            <select name ="activity" id = "region" style="color:black !important;" >
+            <select name ="activity" id = "region">
             <option value = "0" >please choose from below </option>
-
           </div>     
           </select>
           <br/>
         </form>
 
         <br/><br/>
-        <button placeholder="Get Verification Code" id="getVerNum" onclick="getver()" class="btn btn-primary btn-lg">Get Verification Code</button>
+        <button type="text" placeholder="Get Verification Code" id="getVerNum" onclick="getver()" class="btn btn-primary btn-lg"></button>
         <br/><br/>
         </form>
 
         
         <form>
-          Verification Code : <input type = "code" name="verificationCode" style="color:black !important;" id="ver">
+          Verification Code : <input type = "code" name="verificationCode" style="color:black;" id="ver">
           <br/><br/>
           <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
         </form>

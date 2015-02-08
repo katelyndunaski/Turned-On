@@ -158,12 +158,14 @@ def giveMeRegions(request):
 
 @csrf_exempt
 def relayMessageToGroup(request):
-	print request.POST.get("From")[2:]
-	thing = request.POST.get("From")[2:]
-	user = UserPhone.objects.get(phone_number = thing)
-	toNumber = request.POST.get("To")
-	post = request.POST.get("Body")
-	group = UserinGroup.objects.filter(region = user.region).get(user = user)#.filter(twilioNumber = toNumber).get(user = user)
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
+	toNumber = request.GET.get("toNumber")
+	post = request.GET.get("post")
+
+	# Figure out what group to send the message to based on the Twilio number ("toNumber").
+	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
+
+	# Find everyone in the group except for the user who sent the message.
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
@@ -184,15 +186,17 @@ def relayMessageToGroup(request):
 
 @csrf_exempt
 def getGroupsInArea(request):
-	area = request.POST.get("region")
-	user = UserPhone.POST.get(phone_number = request.GET.get("phoneNumber"))
+	area = request.GET.get("region")
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
 	print user
-	authToken = request.POST.get("securityToken")
-	if  int(user.token) != int(authToken):
-		response = HttpResponse()
-		response.status_code = 401
-		return response
-	response = []
+
+	# This is a public API, so no need for security check.
+	# authToken = request.GET.get("securityToken")
+	# if  int(user.token) != int(authToken):
+	# 	response = HttpResponse()
+	# 	response.status_code = 401
+	# 	return response
+	# response = []
 	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region").distinct())
 	print allUserGroups
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
