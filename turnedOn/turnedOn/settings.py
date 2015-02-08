@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'tempThing.urls'
 
-WSGI_APPLICATION = 'tempThing.wsgi.application'
+WSGI_APPLICATION = 'turnedOn.wsgi.application'
 
 
 # Database
