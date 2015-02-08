@@ -69,7 +69,7 @@ function login(){
 
 function login_screen(data){
 	// alert("adfasdfs");
-	document.getElementById("tobereplaced").innerHTML = "Welcome, " ;
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
     $("#replaceAfterLogin1").empty();
     $('body').load( "afterLogin.html" );
 }
