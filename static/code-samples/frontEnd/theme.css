@@ -6,7 +6,7 @@
 	display:inline;
 }
 
-IntroBG {
+.jumbotron{
 	height: 100%; /* Full PAge */
 	position: relative;
 	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
