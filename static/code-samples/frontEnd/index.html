@@ -44,7 +44,7 @@
             <div class="form-group">
               <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
             </div>
-            <button id="signin"  onclick="login()" type="submit" class="btn btn-success">Sign in</button>
+            <button id="signin"  onclick="login()" type="button" class="btn btn-success">Sign in</button>
           </form>
           <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -96,13 +96,9 @@
         <p> select the city you live in: </p>
         <hr/>
         select among this list below : <br/>
-        <select name ="activity">
-        <option value = "0" >please choose from below </option>
-        <option value = "1"> "Providence" </option>
-        <option value = "2"> "New York" </option>
-        <option value = "3"> "LA" </option>
-        <option value = "4"> "Boston" </option>
-        <option value = "5"> "Chicago" </option>    
+        <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+              
         </select>
         <br/><br/>
         <form action="database_filename" method = "get" >
@@ -122,7 +118,26 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
-
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        alert("creating drop down menu");
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["Name"]; 
+          var html =  "<option value="+code+">"+cityName+"</option>";
+          document.getElementById("region").appendChild(newDiv);
+        }  
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+  
     </script>
     <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
   
