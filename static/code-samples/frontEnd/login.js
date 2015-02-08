@@ -136,12 +136,17 @@ function getver(){
 function handleGroupOnOff(theGroupCheckbox)
 {
 	var urlToHit = theGroupCheckbox.checked ? "http://yosephradding.com:8000/subscribeUserToGroup" : "http://yosephradding.com:8000/unsubscribeUserFromGroup";
+	
+	if (num == null)
+	{
+    	num = $("#phone").val();
+    }
     
 	// The user just turned this group on or off.
 	$.ajax({
 		type: 'POST',
 	    url: urlToHit,
-	    data: { userPhoneNumber: num = $("#phone").val(), groupName: theGroupCheckbox.value, securityToken: token },
+	    data: { userPhoneNumber: num, groupName: theGroupCheckbox.value, securityToken: token },
 	    success: function(data)
 	    {
 			// Nothing to do except celebrate.
@@ -155,4 +160,31 @@ function handleGroupOnOff(theGroupCheckbox)
 		}
 	});
 }
-    
+
+function onCityWasChanged(cityDropdown)
+{
+	var selectedCityCode = $(cityDropdown).val();
+	
+	if (num == null)
+	{
+    	num = $("#phone").val();
+    }
+	
+	// The user just turned this group on or off.
+	$.ajax({
+		type: "GET",
+	    url: "http://yosephradding.com:8000/getGroupsInArea",
+	    data: { phoneNumber: num, region: selectedCityCode, securityToken: token },
+	    success: function(data)
+	    {
+			$('#divOfAllGroups').html(data.response);
+	    },
+	    statusCode:
+	    {
+	    	401: function()
+	    	{
+	    	   alert('not authorized');
+	    	}
+		}
+	});
+}
