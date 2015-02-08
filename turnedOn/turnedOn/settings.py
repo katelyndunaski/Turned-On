@@ -87,6 +87,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_DIRS = "/home/ubuntu/Turned-On/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, '../static')]
 
 
 LOGGING = {
