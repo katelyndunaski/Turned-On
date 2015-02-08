@@ -209,3 +209,12 @@ def getGroupsInArea(request):
 	myResponse = HttpResponse(t.render(c), content_type="application/xhtml+xml")
 	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
 	return myResponse
+
+@csrf_exempt
+def createGroup(request):
+	token = request.POST.get("token")
+	groupName = request.POST.get("name")
+	user = UserPhone.objects.filter(token = token)[0]
+	if(len(UserinGroup.objects.filter(region = user.region).filter(name = groupName) )> 0):
+		return JsonResponse({"status":"fail", "Reason":"name taken"})
+	newGroup = UserinGroup(region = user.region, user = user, name = groupName, description = "dfkjahfladkfa", twilioNumber = "14012065509")
