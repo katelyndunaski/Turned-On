@@ -7,6 +7,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.template import RequestContext
 from datetime import datetime
 from random import randint
+from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 
 def home(request):
@@ -14,29 +15,38 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+# def createUser(request, userPhoneNumber, firstName, regionCode):
+
+
+# def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
+	
+
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
-	# TODO: need to check the provided token against the value stored in the database for that phone number.
 	# Make sure it's not expired.
-	isValidToken = True
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+
+	isValidToken = user.token == securityToken
 
 	if isValidToken:
-		# TODO: get these from the database for this user.
-		firstName = "Adam"
-		groupsWithStatus = {"dogs": "on", "cats": "off", "dolphins": "on"}
-		location = "San Francisco, CA"
+		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
+		firstName = user.name
+		location = user.region
 
 		return JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
 	else:
 		response = HttpResponse()
-                response.status_code = 401
-                return response
+		response.status_code = 401
+		return response
 
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	isValidCode = True
 
-	# TODO: this code should be stored in the database with an expiration time.
+	# This token should have an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user.token = newMagicTokenForThisUser
+	user.save()
 
 	if isValidCode:
 		return JsonResponse({"authToken": newMagicTokenForThisUser})
