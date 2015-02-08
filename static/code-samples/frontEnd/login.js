@@ -107,7 +107,7 @@ function getver(){
     }else{
         $.ajax({
             type: 'POST',
-            data:{"userPhoneNumber":num,"firstName":name,"regionCode":region}
+            data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
             url: "http://http://www.yosephradding.com:8000/createUser",
             success: function(data){
                 token= data.authToken;
