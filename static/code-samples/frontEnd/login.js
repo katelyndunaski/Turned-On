@@ -80,10 +80,10 @@ function create_account(){
 }
 
 function signupAccount(){
-    $ajax({
+    $.ajax({
         type:"POST",
-        data:{"userPhoneNumber":"2063838296", "firstName":"Adam", "regionCode":"SCA"},
-        url: "http://www.yosephradding.com:8000/create",
+        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
+        url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         alert('horray! 200 status code! token = '+ token);
         authencookie= data.authToken;
