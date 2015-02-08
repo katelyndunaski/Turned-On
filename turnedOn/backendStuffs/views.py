@@ -63,7 +63,7 @@ def subscribeUserToGroup(request):
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
 	client.messages.create(
-		to=userPhoneNumberToVerify,
+		to=userPhoneNumber,
 		from_=fromNumber,
 		body="Welcome to the {0} group! Here is where you will see all posts pertain to this group.Reply to create Post".format(groupName),
 	)
