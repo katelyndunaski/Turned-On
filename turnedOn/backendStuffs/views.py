@@ -194,6 +194,6 @@ def getGroupsInArea(request):
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
 		i["isOn"] = False
 		allUserGroups.append(i)
-	return render(request, 'backendStuffs/templatForTable.html'{"listi":allUserGroups})
+	return render(request, 'backendStuffs/templatForTable.html',{"listi":allUserGroups})
 
 
