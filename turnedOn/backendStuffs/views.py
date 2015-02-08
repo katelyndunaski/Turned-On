@@ -53,10 +53,11 @@ def subscribeUserToGroup(request):
 		return response
 
 	# TODO: dynamically find a Twilio number that has not been used yet for this user for any groups.
-	twilioNumber = '+14012164446'
+	twilioNumber = '4012164446'
 
 	myGroupMembership = UserinGroup(user = user, name = groupName, region = user.region, isOn = True, twilioNumber = twilioNumber)
 	myGroupMembership.save()
+	twilioNumber = '+14012164446'
 
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
 	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
