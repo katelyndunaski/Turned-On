@@ -60,7 +60,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
     <div class="jumbotron">
-      <div id = "replaceAfterLogin1" class="container">
+      <div id = "replaceAfterLogin1" class="container jumbotron">
         <h1>Hello!</h1>
         <p>Turn on is a platform where you can connect with people with same interests around you!</p>
         <button id = "createAcc" type="button" class="btn btn-success" onclick="create_account()">Don't have accoount? Create one!</button>
@@ -84,26 +84,35 @@
       <hr>
     </div> <!-- /container -->
 
+  <div class="col-md-6 text-left wrap_title">
+    <h2>View Groups in your community!</h2>
+    <p class="lead" style="margin-top:0">groups here<br></p>
+  </div>
+    
+    
     <div class="jumbotron" style = "height:700px">
       <div id = "signscreen" class="container">
-        <h1>Create Account</h1>
+        <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br/><hr/>
         First Name : <input type="text" name = "username" size = "50"/>
         <br/> <br/>
         Phone Number : <input type="text" name = "username" size = "50"/>
-        <br/> <br/>
-        <p> select the city you live in: </p>
+        <br/>
         <hr/>
-        select among this list below : <br/>
-        <select name ="activity">
-        <option value = "0" >please choose from below </option>
-        <option value = "1"> "Providence" </option>
-        <option value = "2"> "New York" </option>
-        <option value = "3"> "LA" </option>
-        <option value = "4"> "Boston" </option>
-        <option value = "5"> "Chicago" </option>    
-        </select>
+        <p> select the city you live in: </p>
+          <form action="database_filename">
+          <input list="browsers">
+          <datalist id="browsers">select among this list below : <br/>
+            <select name ="Location">
+              <option value = "Providence"> "Providence" </option>
+              <option value = "New York"> "New York" </option>
+              <option value = "LA"> "LA" </option>
+              <option value = "Boston"> "Boston" </option>
+              <option value = "Chicago"> "Chicago" </option>    
+            </select>
+          </datalist> 
+          </form>
         <br/><br/>
         <form action="database_filename" method = "get" >
           <input type="submit" value = "Create Account" />
