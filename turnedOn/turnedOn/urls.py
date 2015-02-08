@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^checkWhetherSmsVerificationCodeIsValidAndReturnAToken', 'backendStuffs.views.checkWhetherSmsVerificationCodeIsValidAndReturnAToken', name='checkWhetherSmsVerificationCodeIsValidAndReturnAToken'),
     url(r'^getUserInfo', 'backendStuffs.views.getUserInfo', name='getUserInfo'),
     url(r'^create', 'backendStuffs.views.createUser', name='create'),
+    url(r'^subscribeUserToGroup', 'backendStuffs.views.subscribeUserToGroup', name='subscribeUserToGroup'),
 )
