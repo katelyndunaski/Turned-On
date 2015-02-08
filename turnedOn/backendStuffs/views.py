@@ -10,6 +10,7 @@ from random import randint
 from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
 
 
@@ -17,7 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 def home(request):
     """Renders the home page."""
     # import twilio.rest
-    return JsonResponse({"text":"hi"})
+    return return render(request, 'backendStuffs/index.html', {})
 
 @csrf_exempt
 def createUser(request):
