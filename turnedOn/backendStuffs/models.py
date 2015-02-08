@@ -13,6 +13,9 @@ class UserPhone(models.Model):
 	token = models.IntegerField(null=True)
 	region = models.CharField(choices = regionChoices, max_length = 3)
 
+	def __unicode__(self):
+		return "Name: {0} ".format(self.name)
+
 class UserinGroup(models.Model):
 	global regionChoices
 	region = models.CharField(choices = regionChoices, max_length = 3)
