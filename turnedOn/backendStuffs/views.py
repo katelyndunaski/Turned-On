@@ -19,7 +19,7 @@ def home(request):
 
 @csrf_exempt
 def createUser(request):
-	request.
+	# request.
 	f = UserPhone(userPhoneNumber, firstName, regionCode)
 
 	response = HttpResponse()
@@ -76,7 +76,8 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumb
 		return response
 
 @csrf_exempt
-def sendSmsVerificationCode(request, userPhoneNumberToVerify):
+def sendSmsVerificationCode(request):
+	userPhoneNumberToVerify = request.POST["userPhoneNumberToVerify"]
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
 
