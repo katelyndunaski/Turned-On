@@ -75,7 +75,11 @@ function login(){
 }
 
 function login_screen(data,num){
-	// alert("adfasdfs");
+    $("#signscreen").empty();
+    $("#container1").empty();
+    $("#container1").css("background-color:#C8C8C8");
+    $("#signscreen").css("background-color:#33CC66");
+
     $.ajax({
         type: 'POST',
         data:{"region":$("#region").val(),"phoneNumber":num,"securityToken":token},
@@ -84,7 +88,7 @@ function login_screen(data,num){
             alert('22222222222222horray! 200 status code!');
             //Do things with the things yo.
         }
-    })
+    });
     
 }
 
