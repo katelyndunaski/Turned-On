@@ -8,6 +8,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^sendSmsVerificationCode/(?P<userPhoneNumberToVerify>\d{10})', 'backendStuffs.views.sendSmsVerificationCode', name='sendSmsVerificationCode'),
-    url(r'^checkWhetherSmsVerificationCodeIsValidAndReturnAToken/forPhoneNumber/(?P<userPhoneNumberToVerify>\d{10})/withCode/(?P<verificationCode>\d{9})', 'backendStuffs.views.checkWhetherSmsVerificationCodeIsValidAndReturnAToken', name='checkWhetherSmsVerificationCodeIsValidAndReturnAToken'),
+    url(r'^checkWhetherSmsVerificationCodeIsValidAndReturnAToken/forPhoneNumber/(?P<userPhoneNumberToVerify>\d{10})/withCode/(?P<verificationCode>\d{4})', 'backendStuffs.views.checkWhetherSmsVerificationCodeIsValidAndReturnAToken', name='checkWhetherSmsVerificationCodeIsValidAndReturnAToken'),
     url(r'^getUserInfo/forPhoneNumber/(?P<userPhoneNumberToVerify>\d{10})/withToken/(?P<securityToken>\d{9})', 'backendStuffs.views.getUserInfo', name='getUserInfo'),
 )
