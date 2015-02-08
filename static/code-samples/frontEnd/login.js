@@ -18,7 +18,7 @@ function validate(){
     console.log(num);
 	$.ajax({
     type: "POST",
-    data:{"userPhoneNumberToVerify":num},
+    data:{"userPhoneNumber":num},
     url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
     success: function(){
         alert('horray! 200 status code!');
@@ -50,29 +50,26 @@ function login(){
     data:{"number":num,"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
-        alert('horray! 200 status code!');
-        token = data;
+        alert('1111111111111horray! 200 status code!');
+        token = data.authToken;
+        $.ajax({
+            type: 'POST',
+            data:{"number":num,"securityToken":token},
+            url: "http://www.yosephradding.com:8000/getUserInfo",
+            success: function(data){
+                alert('22222222222222horray! 200 status code!');
+                login_screen(data);
+            }
+        })
+
     },
     statusCode: {
     401: function() {
        alert('bad request');
     }}});
 
+    console.log(window.token);
 
-
-    $.ajax({
-    type: 'POST',
-    data:{"number":num,"securityToken":token},
-    url: "http://www.yosephradding.com:8000/getUserInfo",
-    success: function(data){
-        alert('horray! 200 status code!');
-    },
-    statusCode: {
-    401: function() {
-       alert('bad request');
-    }}});
-
-    login_screen(data);
 	return;	
 }
 
