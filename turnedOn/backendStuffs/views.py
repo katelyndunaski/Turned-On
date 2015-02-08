@@ -33,13 +33,13 @@ def createUser(request):
 @csrf_exempt
 def subscribeUserToGroup(request):
 	userPhoneNumber = request.POST.get("userPhoneNumber")
-	firstName = request.POST.get("groupName")
+	groupName = request.POST.get("groupName")
 	securityToken = request.POST.get("securityToken")
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumber)
 
 	isValidToken = int(user.token) == int(securityToken)
-	
+
 	if not isValidToken:
 		response = HttpResponse()
 		response.status_code = 401
