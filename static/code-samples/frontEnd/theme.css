@@ -1,7 +1,7 @@
 #logo{
 	display : inline;
 }
-#fullwindow{
+.container{
 	background: url(jumbotron_bg.jpg) no-repeat center center;
 }
 #phoneNum{
