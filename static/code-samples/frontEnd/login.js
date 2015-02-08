@@ -31,10 +31,19 @@ function validate(){
 
 }
 
+$("#signinform").submit(function (e) {
+    login();
+    e.preventDefault();
+    return false;
+})
+
 
 function login(){
 	var code = document.getElementById("verify").value;
 	var num = document.getElementById("phoneNumber").value;
+    login_screen(0);
+    return;
+
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
 		return;
@@ -59,8 +68,8 @@ function login(){
 }
 
 function login_screen(data){
-	alert("adfasdfs");
-	document.getElementById("tobereplaced").innerHTML = "Welcome, "             ;
-
-
+	// alert("adfasdfs");
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
+    $("#replaceAfterLogin1").empty();
+    $('body').load( "afterLogin.html" );
 }

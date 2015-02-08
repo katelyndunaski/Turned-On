@@ -2,30 +2,23 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 # Create your models here.
-
-class Regions(models.Model):
-	regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"))
-	region = models.CharField(max_length = 3, choices = regionChoices)
-
-	@classmethod
-	def getJSONServer(cls):
-		regions = [{"code":x[0],"name":x[1]} for x in cls.regionChoices]
-		return regions
+regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"))
 
 class UserPhone(models.Model):
+	global regionChoices
 	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
 	phone_number = models.CharField(validators=[phone_regex], unique=True, max_length = 10)
-	verificationNumber = models.IntegerField()
+	verificationNumber = models.IntegerField(null = True)
 	name = models.CharField(max_length = 100)
-	token = models.IntegerField()
-	region = models.ForeignKey(Regions)
+	token = models.IntegerField(null=True)
+	region = models.CharField(choices = regionChoices, max_length = 3)
 
 class UserinGroup(models.Model):
-
-	region = models.ForeignKey(Regions)
+	global regionChoices
+	region = models.CharField(choices = regionChoices, max_length = 3)
 	user = models.ForeignKey(UserPhone)
 	name = models.CharField(max_length = 500)
-	description = models.TextField(blank = True)
+	description = models.TextField(null = True)
 	isOn = models.BooleanField(default=True)
 	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
 	twilioNumber = models.CharField(validators=[phone_regex],max_length = 10)
