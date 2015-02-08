@@ -53,7 +53,7 @@ def subscribeUserToGroup(request):
 		return response
 
 	# TODO: dynamically find a Twilio number that has not been used yet for this user for any groups.
-	twilioNumber = '4012164446'
+	twilioNumber = '+14012164446'
 
 	myGroupMembership = UserinGroup(user = user, name = groupName, region = user.region, isOn = True, twilioNumber = twilioNumber)
 	myGroupMembership.save()
@@ -61,10 +61,10 @@ def subscribeUserToGroup(request):
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
 	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
-
+	# fromNumber = 
 	client.messages.create(
 		to=userPhoneNumber,
-		from_=fromNumber,
+		from_=twilioNumber,
 		body="Welcome to the {0} group! Here is where you will see all posts pertain to this group.Reply to create Post".format(groupName),
 	)
 
