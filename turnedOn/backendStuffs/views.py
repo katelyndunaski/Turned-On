@@ -89,8 +89,9 @@ def getUserInfo(request):
 		groupsWithStatus = list(UserinGroup.objects.filter(user = userPhoneNumberToVerify))
 		firstName = user.name
 		location = user.region
-
-		return JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
+		response = JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
+		response.__setitem__("Access-Control-Allow-Origin", "*")
+		return response
 	else:
 		response = HttpResponse()
 		response.status_code = 401
