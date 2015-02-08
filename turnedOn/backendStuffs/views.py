@@ -30,6 +30,7 @@ def createUser(request):
 		newUser.save()
 
 		response = HttpResponse()
+		sendSmsVerificationCode(request)
 		response.status_code = 200
 		return response
 	else:
@@ -147,9 +148,9 @@ def giveMeRegions(request):
 
 @csrf_exempt
 def relayMessageToGroup(request):
-	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
-	toNumber = request.POST.get("toNumber")
-	post = request.POST.get("post")
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
+	toNumber = request.GET.get("toNumber")
+	post = request.GET.get("post")
 	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
