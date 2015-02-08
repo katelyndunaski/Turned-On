@@ -167,7 +167,7 @@ def relayMessageToGroup(request):
 	print "Hey"
 	toNumber = request.POST.get("To")
 	post = request.POST.get("Body")
-	groups = UserinGroup.objects.filter(region = user.region).filter(user = user)[randint()
+	groups = UserinGroup.objects.filter(region = user.region).filter(user = user) 
 	for group in groups:
 		groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
