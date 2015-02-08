@@ -108,7 +108,7 @@ function getver(){
         $.ajax({
             type: 'POST',
             data:{"userPhoneNumber":num,"firstName":name,"regionCode":region},
-            url: "http://http://www.yosephradding.com:8000/createUser",
+            url: "http://www.yosephradding.com:8000/createUser",
             success: function(data){
                 token= data.authToken;
                 alert('horray! 200 status code! token = '+ token);
