@@ -57,7 +57,7 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         
-    <div id="container3">
+    <div id="container3" class = "resize">
       <div class="container-fluid">
         <h1 style = "color:white">Get TurnedOn Now!</h1>
         <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
@@ -68,7 +68,7 @@
   </div>
 
 
-    <div id="container1">
+    <div id="container1" class = "resize">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4" style="float: center; margin-right: 50px">
@@ -89,18 +89,19 @@
     
     <!--<div class="jumbotron" style = "height:800px">-->
       <div id = "signscreen" class="container">
+        <form>
         <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br/>
-        First Name   : <input type="text" id = "firstname" name="username" size = "50"/>
+        First Name   : <input type="text" id = "firstname" name="username" size = "50" style="color:black;">
         <br/> <br/>
 
         <form>
-        Phone Number : <input type="text" name = "username" size = "50"/>
+        Phone Number : <input type="text" name = "username" size = "50" style="color:black;"/>
         <br/>
         <hr/>
         <p> select the city you live in: </p>
-          <form action="database_filename">
+          
           <input list="browsers">
           <datalist id="browsers">select among this list below : <br/>
             <select name ="Location">
@@ -126,7 +127,7 @@
         </select>
         <br/><br/>
         <form>
-          Verification Code : <input type = "code" name="verificationCode"/>
+          Verification Code : <input type = "code" name="verificationCode" style="color:black;">
           <br/><br/>
           <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
         </form>
@@ -161,8 +162,8 @@
        alert('bad request');
     }}});
 
-    $('#container3').css('height',screen.height-51);
-    $('#container3').css('width',screen.width);
+    $('.resize').css('height',screen.height-51);
+    $('.resive').css('width',screen.width);
     </script>
     <script src="static/code-samples/frontEnd/bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
   
