@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 # Create your models here.
-regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"))
+regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"), ("ELM", "East Lansing, MI"))
 
 class UserPhone(models.Model):
 	global regionChoices
@@ -12,6 +12,9 @@ class UserPhone(models.Model):
 	name = models.CharField(max_length = 100)
 	token = models.IntegerField(null=True)
 	region = models.CharField(choices = regionChoices, max_length = 3)
+
+	def __unicode__(self):
+		return "Name: {0} ".format(self.name)
 
 class UserinGroup(models.Model):
 	global regionChoices

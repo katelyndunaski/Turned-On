@@ -11,10 +11,12 @@ from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
 from django.views.decorators.csrf import csrf_exempt
 
+
+
 @csrf_exempt
 def home(request):
     """Renders the home page."""
-    import twilio.rest
+    # import twilio.rest
     return JsonResponse({"text":"hi"})
 
 @csrf_exempt
@@ -31,30 +33,53 @@ def createUser(request):
 	return response
 
 @csrf_exempt
-def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
-	# TODO: check the security token.
+def subscribeUserToGroup(request):
+	userPhoneNumber = request.POST.get("userPhoneNumber")
+	groupName = request.POST.get("groupName")
+	securityToken = request.POST.get("securityToken")
 
-	# TODO: find a Twilio number that has not been used yet for this user for any groups.
-	twilioNumber = '4012065509'
+	user = UserPhone.objects.get(phone_number = userPhoneNumber)
 
-	UserinGroup.create(userPhoneNumber, groupName, regionCode, True, twilioNumber)
+	isValidToken = int(user.token) == int(securityToken)
 
-        response = HttpResponse()
-        response.status_code = 200
-        return response
+	if not isValidToken:
+		response = HttpResponse()
+		response.status_code = 401
+		return response
+
+	# TODO: dynamically find a Twilio number that has not been used yet for this user for any groups.
+	twilioNumber = '4012164446'
+
+	myGroupMembership = UserinGroup(user = user, name = groupName, region = user.region, isOn = True, twilioNumber = twilioNumber)
+	myGroupMembership.save()
+
+	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
+	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
+	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+
+	client.messages.create(
+		to=userPhoneNumberToVerify,
+		from_=fromNumber,
+		body="Welcome to the {0} group! Here is where you will see all posts pertain to this group.Reply to create Post".format(groupName),
+	)
+
+	response = HttpResponse()
+	response.status_code = 200
+	return response
 
 @csrf_exempt
 def getUserInfo(request):
-	# Make sure it's not expired.
 	userPhoneNumberToVerify = request.POST.get("number")
 	securityToken = request.POST.get("securityToken")
 
+	# TODO: Make sure the securityToken is not expired.
+
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
-	isValidToken = user.token == securityToken
+	isValidToken = int(user.token) == int(securityToken)
 
 	if isValidToken:
-		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
+		groupsWithStatus = list(UserinGroup.objects.filter(user = userPhoneNumberToVerify))
 		firstName = user.name
 		location = user.region
 
@@ -66,15 +91,15 @@ def getUserInfo(request):
 
 @csrf_exempt
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
-	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	userPhoneNumberToVerify = request.POST.get("number")
 	verificationCode = request.POST.get("verificationCode")
 
-	isValidCode = True
-
-	# This token should have an expiration time.
-	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+
+	isValidCode = int(user.verificationNumber) == int(verificationCode)
+
+    # TODO: This token should have an expiration time.
+	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user.token = newMagicTokenForThisUser
 	user.save()
 
@@ -88,7 +113,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 @csrf_exempt
 def sendSmsVerificationCode(request):
 	userPhoneNumberToVerify = request.POST.get("userPhoneNumberToVerify")
-	print userPhoneNumberToVerify
+
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
 
@@ -97,10 +122,11 @@ def sendSmsVerificationCode(request):
 
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
-	# TODO: this code should be stored in the database as a valid code for this user.
 	verificationCode = "{0:04d}".format(randint(0,9999))
 
-	# userPhoneNumberToVerify = "2063838296"
+        user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+        user.verificationNumber = verificationCode
+        user.save()
 
 	client.messages.create(
 		to=userPhoneNumberToVerify,
@@ -111,6 +137,14 @@ def sendSmsVerificationCode(request):
 	response = HttpResponse()
 	response.status_code = 200
 	return response
+
+@csrf_exempt
+def giveMeRegions(request):
+	return(JsonResponse([{"code":x[0], "name":x[1]} for x in regionChoices], safe = False))
+
+@csrf_exempt
+def relayMessageToGroup(request):
+	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
 
 # def contact(request):
 #     """Renders the contact page."""
