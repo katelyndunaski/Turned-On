@@ -15,6 +15,9 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+# def createUser(request, userPhoneNumber, firstName, regionCode):
+
+
 # def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
 	
 
