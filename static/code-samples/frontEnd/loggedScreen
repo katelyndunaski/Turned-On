@@ -8,12 +8,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="login.js"></script>
     <title>Turned ON</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -35,22 +41,16 @@
           </button>
           <a class="navbar-brand" href="#">Turned ON</a>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
-          <div id = "tobereplaced">
-          <form class="navbar-form navbar-right">
+          <form  id = "userName" class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
+              <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" />
             </div>
-            <button id="signin"  onclick="login()" type="submit" class="btn btn-success">Sign in</button>
+            <button id = "signin" type="submit" class="btn btn-success"  onclick = "login()">Sign in</button>
           </form>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" id = "phoneNumber" placeholder="Phone Number" class="form-control">
-            </div>
-            <button id = "getcode" type="submit" class="btn btn-success" onclick="validate()">Get Verfication Code</button>
-          </form>
-        </div>
         </div><!--/.navbar-collapse -->
+
       </div>
     </nav>
 
@@ -67,9 +67,9 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        
+
+
         </div>
       </div>
       <hr>
@@ -84,6 +84,7 @@
 
     </script>
     <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-  
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
