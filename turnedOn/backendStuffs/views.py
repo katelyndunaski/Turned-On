@@ -37,7 +37,7 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 	# TODO: find a Twilio number that has not been used yet for this user for any groups.
 	twilioNumber = '4012065509'
 
-	UserinGroup.create(userPhoneNumber, groupName, regionCode, True, twilioNumber)
+	myGroupMembership = UserinGroup(user = userPhoneNumber, name = groupName, region = regionCode, isOn = True, twilioNumber = twilioNumber)
 
         response = HttpResponse()
         response.status_code = 200
@@ -50,7 +50,7 @@ def getUserInfo(request):
 
 	# TODO: Make sure the securityToken is not expired.
 
-	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user = list(UserPhone.objects.get(phone_number = userPhoneNumberToVerify))
 
 	isValidToken = int(user.token) == int(securityToken)
 
