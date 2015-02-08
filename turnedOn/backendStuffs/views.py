@@ -19,8 +19,12 @@ def home(request):
 
 @csrf_exempt
 def createUser(request):
-	# request.
-	f = UserPhone(userPhoneNumber, firstName, regionCode)
+	userPhoneNumber = request.POST.get("userPhoneNumber")
+	firstName = request.POST.get("firstName")
+	regionCode = request.POST.get("regionCode")
+
+	newUser = UserPhone(userPhoneNumber, firstName, regionCode)
+	newUser.save()
 
 	response = HttpResponse()
 	response.status_code = 200
@@ -28,7 +32,7 @@ def createUser(request):
 
 @csrf_exempt
 def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
-	# TODO: check the security token.
+	# TODO: validate the security token.
 
 	# TODO: find a Twilio number that has not been used yet for this user for any groups.
 	twilioNumber = '4012065509'
@@ -41,7 +45,10 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 
 @csrf_exempt
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
-	# Make sure it's not expired.
+	# TODO: Make sure it's not expired.
+	userPhoneNumberToVerify = request.POST.get("number")
+	securityToken = request.POST.get("securityToken")
+
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidToken = user.token == securityToken
@@ -58,8 +65,11 @@ def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 		return response
 
 @csrf_exempt
-def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
+def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
+	userPhoneNumberToVerify = request.POST.get("number")
+	verificationCode = request.POST.get("verificationCode")
+
 	isValidCode = True
 
 	# This token should have an expiration time.
@@ -87,8 +97,12 @@ def sendSmsVerificationCode(request):
 
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
-	# TODO: this code should be stored in the database as a valid code for this user.
 	verificationCode = "{0:04d}".format(randint(0,9999))
+
+	# Save the verification code in the database.
+	userInfo = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	userInfo.verificationNumber = verificationCode
+	userInfo.save()
 
 	# userPhoneNumberToVerify = "2063838296"
 
