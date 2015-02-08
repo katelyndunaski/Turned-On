@@ -136,7 +136,7 @@ function handleGroupOnOff(theGroupCheckbox)
 	$.ajax({
 		type: 'POST',
 	    url: urlToHit,
-	    data: { userPhoneNumber: num = $("#phone").val(), groupName: theGroupCheckbox.value, securityToken: token }
+	    data: { userPhoneNumber: num = $("#phone").val(), groupName: theGroupCheckbox.value, securityToken: token },
 	    success: function(data)
 	    {
 			// Nothing to do except celebrate.
