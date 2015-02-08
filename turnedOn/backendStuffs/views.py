@@ -46,6 +46,9 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 @csrf_exempt
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# TODO: Make sure it's not expired.
+	userPhoneNumberToVerify = request.POST.get("number")
+	securityToken = request.POST.get("securityToken")
+
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidToken = user.token == securityToken
@@ -62,8 +65,11 @@ def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 		return response
 
 @csrf_exempt
-def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
+def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
+	userPhoneNumberToVerify = request.POST.get("number")
+	verificationCode = request.POST.get("verificationCode")
+
 	isValidCode = True
 
 	# This token should have an expiration time.
