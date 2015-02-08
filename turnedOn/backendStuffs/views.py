@@ -22,15 +22,19 @@ def home(request):
 @csrf_exempt
 def createUser(request):
 	userPhoneNumber = request.POST.get("userPhoneNumber")
-	firstName = request.POST.get("firstName")
-	regionCode = request.POST.get("regionCode")
+	if len(UserPhone.objects.filter(phone_number = userPhoneNumber)) == 0 :
+		firstName = request.POST.get("firstName")
+		regionCode = request.POST.get("regionCode")
 
-	newUser = UserPhone(phone_number=userPhoneNumber, name = firstName, region = regionCode)
-	newUser.save()
+		newUser = UserPhone(phone_number=userPhoneNumber, name = firstName, region = regionCode)
+		newUser.save()
 
-	response = HttpResponse()
-	response.status_code = 200
-	return response
+		response = HttpResponse()
+		sendSmsVerificationCode(request)
+		response.status_code = 200
+		return response
+	else:
+		return sendSmsVerificationCode(request)
 
 @csrf_exempt
 def subscribeUserToGroup(request):
@@ -112,7 +116,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 
 @csrf_exempt
 def sendSmsVerificationCode(request):
-	userPhoneNumberToVerify = request.POST.get("userPhoneNumberToVerify")
+	userPhoneNumberToVerify = request.POST.get("userPhoneNumber")
 
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
@@ -144,9 +148,9 @@ def giveMeRegions(request):
 
 @csrf_exempt
 def relayMessageToGroup(request):
-	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
-	toNumber = request.POST.get("toNumber")
-	post = request.POST.get("post")
+	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
+	toNumber = request.GET.get("toNumber")
+	post = request.GET.get("post")
 	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
@@ -167,10 +171,10 @@ def relayMessageToGroup(request):
 
 @csrf_exempt
 def getGroupsInArea(request):
-	area = request.GET.get("region")
-	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
+	area = request.POST.get("region")
+	user = UserPhone.objects.get(phone_number = request.POST.get("phoneNumber"))
 	print user
-	authToken = request.GET.get("securityToken")
+	authToken = request.POST.get("securityToken")
 	if  int(user.token) != int(authToken):
 		response = HttpResponse()
 		response.status_code = 401
