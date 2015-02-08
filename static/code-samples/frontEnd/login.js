@@ -89,7 +89,7 @@ function login_screen(data){
     // $("#container3").empty();
     // $("jumbotron")
     
-    var ugh2 = "<div id='locationDropdownDiv'><div><select name ='activity' id = 'region' onchange='onCityWasChanged(this);'><option value = '0' >please choose from below </option></select></div><div id='divOfAllGroups'></div></div>";
+    var ugh2 = "<br /><br /><br /><br /><br /><div id='locationDropdownDiv'><div><select name ='activity' id = 'region' onchange='onCityWasChanged(this);'><option value = '0' >please choose from below </option></select></div><div id='divOfAllGroups'></div></div>";
     $("body").append(ugh2);
     
     var code;
