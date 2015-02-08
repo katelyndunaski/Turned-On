@@ -69,7 +69,13 @@ function login(){
 
 function login_screen(data){
 	// alert("adfasdfs");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + "INSTERT TOKEN" + "</p> ");
     $("#replaceAfterLogin1").empty();
-    $('body').load( "afterLogin.html" );
+    //$('body').load( "index.html" );
 }
+
+
+
+
+
+
