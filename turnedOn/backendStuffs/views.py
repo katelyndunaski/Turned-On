@@ -50,7 +50,7 @@ def getUserInfo(request):
 
 	# TODO: Make sure the securityToken is not expired.
 
-	user = list(UserPhone.objects.get(phone_number = userPhoneNumberToVerify))
+	user = list(UserPhone.objects.filter(phone_number = userPhoneNumberToVerify))
 
 	isValidToken = int(user.token) == int(securityToken)
 
