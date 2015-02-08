@@ -97,9 +97,9 @@ function signupAccount(){
 }
 
 function getver(){
-    var num = $("#phone").val(); 
-    var name = $("#fistname").val();
-    var region = $("#region").val();
+    num = $("#phone").val(); 
+    name = $("#firstname").val();
+    region = $("#region").val();
     if(num.length == 0 ){
         alert("please enter your phone number!");
     }else if(name.length==0){
