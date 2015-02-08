@@ -21,9 +21,11 @@
 }
 
 #container1{
+	display: block;
 	background-attachment: fixed !important;
 	background-color: LightSteelBlue ;
-	height: relative !important;
+	height: 350px;
+	text-align: center;
 }
 
 #container2 {
