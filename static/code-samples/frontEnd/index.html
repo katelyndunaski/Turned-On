@@ -129,8 +129,11 @@
           var newDiv=document.createElement('option');
           code = data[i]["code"];
           cityName = data[i]["Name"]; 
-          var html =  "<option value="+code+">"+cityName+"</option>";
-          document.getElementById("region").appendChild(newDiv);
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          // var html =  "<option value="+code+">"+cityName+"</option>";
+          // document.getElementById("region").appendChild(newDiv);
+          $("#region").append(newDiv);
         }  
     },
     statusCode: {
