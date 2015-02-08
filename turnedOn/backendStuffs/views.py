@@ -19,10 +19,12 @@ def home(request):
 
 @csrf_exempt
 def createUser(request):
-	phoneNumber = request.POST.get("number")
-	firstName = request.POST.get("number")
+	userPhoneNumber = request.POST.get("userPhoneNumber")
+	firstName = request.POST.get("firstName")
 	regionCode = request.POST.get("regionCode")
-	f = UserPhone(phone_number = userPhoneNumber, firstName, regionCode)
+
+	newUser = UserPhone(userPhoneNumber, firstName, regionCode)
+	newUser.save()
 
 	response = HttpResponse()
 	response.status_code = 200
@@ -46,6 +48,7 @@ def getUserInfo(request):
 	# Make sure it's not expired.
 	userPhoneNumberToVerify = request.POST.get("number")
 	securityToken = request.POST.get("securityToken")
+
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidToken = user.token == securityToken
