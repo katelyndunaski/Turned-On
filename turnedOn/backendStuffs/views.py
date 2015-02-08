@@ -56,12 +56,12 @@ def getUserInfo(request):
 
 	# TODO: Make sure the securityToken is not expired.
 
-	user = list(UserPhone.objects.get(phone_number = userPhoneNumberToVerify))
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
 	isValidToken = int(user.token) == int(securityToken)
 
 	if isValidToken:
-		groupsWithStatus = UserinGroup.objects.filter(user = userPhoneNumberToVerify)
+		groupsWithStatus = list(UserinGroup.objects.filter(user = userPhoneNumberToVerify))
 		firstName = user.name
 		location = user.region
 
