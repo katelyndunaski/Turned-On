@@ -90,6 +90,29 @@ function login_screen(data){
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")
+    
+    var ugh2 = "<div id='locationDropdownDiv'><div><select name ='activity' id = 'region' onchange='onCityWasChanged(this);'><option value = '0' >please choose from below </option></select></div><div id='divOfAllGroups'></div></div>";
+    $("body").append(ugh2);
+    
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["name"]; 
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          $("#region").append(newDiv);
+        }  
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
 }
 
 function create(data1, data2){
