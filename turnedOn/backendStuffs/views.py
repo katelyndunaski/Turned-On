@@ -158,10 +158,10 @@ def giveMeRegions(request):
 
 @csrf_exempt
 def relayMessageToGroup(request):
-	user = UserPhone.objects.get(phone_number = request.GET.get("phoneNumber"))
-	toNumber = request.GET.get("toNumber")
-	post = request.GET.get("post")
-	group = UserinGroup.objects.filter(region = user.region).filter(twilioNumber = toNumber).get(user = user)
+	user = UserPhone.objects.get(phone_number = request.POST.get("From"))
+	toNumber = request.POST.get("To")
+	post = request.POST.get("Body")
+	group = UserinGroup.objects.filter(region = user.region).get(user = user)#.filter(twilioNumber = toNumber).get(user = user)
 	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
 	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
