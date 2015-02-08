@@ -45,9 +45,10 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
 
 @csrf_exempt
 def getUserInfo(request):
-	# Make sure it's not expired.
 	userPhoneNumberToVerify = request.POST.get("number")
 	securityToken = request.POST.get("securityToken")
+
+	# TODO: Make sure the securityToken is not expired.
 
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
 
