@@ -59,7 +59,7 @@ function login(){
     }}});
 
 
-
+    console.log(token);
     $.ajax({
     type: 'POST',
     data:{"number":num,"securityToken":token},
