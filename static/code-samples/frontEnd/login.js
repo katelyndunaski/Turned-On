@@ -5,7 +5,7 @@ var token;
 var authencookie;
 
 function getcode(data){
-		alert("verfication number sent successfully");
+		alert("verification number sent successfully");
 		return true;
 }
 
@@ -74,6 +74,7 @@ function login(){
 	return;	
 }
 
+
 function login_screen(data){
 	// alert("adfasdfs");
     x = $("nav");
@@ -81,10 +82,22 @@ function login_screen(data){
     $("body").append(x);
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
+    
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")
     
+}
+
+function create(data1, data2){
+     $.ajax({
+        type:"POST",
+        data:{"token":data1,"name":data2},
+        url: "http://www.yosephradding.com:8000/createGroup",
+        success: function(data){
+            // relaod table
+    }});
+
 }
 
 function create_account(){
@@ -99,7 +112,7 @@ function signupAccount(){
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         authencookie= data.authToken;
-        localstorage.setItem("turnedOnCookie",authencookie)
+        localStorage.setItem("turnedOnCookie",authencookie)
         // alert('horray! 200 status code! token = '+ authencookie);
         login_screen();
     },
@@ -139,7 +152,7 @@ function handleGroupOnOff(theGroupCheckbox)
 	
 	if (num == null)
 	{
-    	num = $("#phone").val();
+    	num = $("#phoneNumber").val();
     }
     
 	// The user just turned this group on or off.
@@ -161,13 +174,14 @@ function handleGroupOnOff(theGroupCheckbox)
 	});
 }
 
+
 function onCityWasChanged(cityDropdown)
 {
 	var selectedCityCode = $(cityDropdown).val();
 	
 	if (num == null)
 	{
-    	num = $("#phone").val();
+    	num = $("#phoneNumber").val();
     }
 	
 	// The user just turned this group on or off.
