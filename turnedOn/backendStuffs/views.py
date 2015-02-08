@@ -14,10 +14,27 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
+def getUserInfo(request, userPhoneNumberToVerify, securityToken):
+	# TODO: need to check the provided token against the value stored in the database for that phone number.
+	# Make sure it's not expired.
+	isValidToken = true
+
+	if isValidToken:
+		# TODO: get these from the database for this user.
+		firstName = "Adam"
+		groupsWithStatus = {"dogs": "on", "cats": "off", "dolphins": "on"}
+		location = "San Francisco, CA"
+
+		return JsonResponse({"firstName": firstName, "groupsWithStatus": groupsWithStatus, "location": location})
+	else:
+		response = HttpResponse()
+                response.status_code = 401
+                return response
+
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	isValidCode = true
-	
+
 	# TODO: this code should be stored in the database with an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 
