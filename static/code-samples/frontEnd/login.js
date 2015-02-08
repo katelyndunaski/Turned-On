@@ -18,7 +18,7 @@ function validate(){
     console.log(num);
 	$.ajax({
     type: "POST",
-    data:{"userPhoneNumberToVerify":num},
+    data:{"userPhoneNumber":num},
     url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
     success: function(){
         alert('horray! 200 status code!');
