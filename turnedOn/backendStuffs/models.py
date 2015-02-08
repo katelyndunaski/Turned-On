@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 # Create your models here.
-regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"))
+regionChoices = (("PRI","Providence, RI"), ("NNY", "New York, NY"), ("SCA", "San Francisco, CA"), ("ELM", "East Lansing, MI"))
 
 class UserPhone(models.Model):
 	global regionChoices
