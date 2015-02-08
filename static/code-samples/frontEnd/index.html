@@ -68,7 +68,8 @@
 >>>>>>> FETCH_HEAD
         <h1 style = "color:white">Get TurnedOn Now!</h1>
         <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
-        <p><button  id="      "  onclick="  ()" type="button"   class="btn btn-primary btn-lg" >Learn more &raquo;</a></p>
+        <button onclick="create_account()" type="button"  class="btn btn-primary btn-lg">Don't have account? Create one! </button>
+        <br/>
       </div>
     </div>
 
@@ -96,10 +97,10 @@
         <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
         <br/>
-        First Name   : <input type="text" name = "username" size = "50"/>
+        First Name   : <input type="text" id = "firstname" name="username" size = "50"/>
         <br/> <br/>
 
-        <form action="database_filename" method = "get" >
+        <form>
         Phone Number : <input type="text" name = "username" size = "50"/>
 <<<<<<< HEAD
         <br/>
@@ -119,7 +120,7 @@
           </form>
 =======
         <br/><br/>
-        <input type="submit" value = "Get Verification Code" />
+        <button type="button" id = "getVerNum" onclick="getver()" class="btn btn-primary btn-lg"> Get Verification Code </button>
         <br/><br/>
         </form>
 
@@ -131,10 +132,10 @@
         </select>
 >>>>>>> FETCH_HEAD
         <br/><br/>
-        <form action="database_filename" method = "get" >
-          Verification Code : <input type = "password" name="password"/>
-          <br/>
-          <input type="submit" value = "Create Account" />
+        <form>
+          Verification Code : <input type = "code" name="verificationCode"/>
+          <br/><br/>
+          <button type="button" onclick="signupAccount()" class="btn btn-primary btn-lg" > Create Account </button>
         </form>
 
       </div>
