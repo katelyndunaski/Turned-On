@@ -20,7 +20,6 @@ function validate(){
     data:{"userPhoneNumberToVerify":num},
     url: "http://www.yosephradding.com:8000/sendSmsVerificationCode",
     success: function(){
-    
         alert('horray! 200 status code!');
     },
 
@@ -28,26 +27,13 @@ function validate(){
     401: function() {
        alert('bad request');
     }}});
-/**
-	$.ajax({
-    type: 'GET',
-    url: "http://www.yosephradding.com:8000/sendSmsVerificationCode/"+num,
-    success: function(data){
-        alert("phone worked");
-    },
-    statusCode: {
-    401: function() {
-       alert('bad request');
-   	}}});
-**/
-
 }
 
 $("#signinform").submit(function (e) {
     login();
     e.preventDefault();
     return false;
-})
+});
 
 
 function login(){
@@ -56,18 +42,15 @@ function login(){
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
 		return;
-	}
-	
-	
+    }
 	
     $.ajax({
     type: 'POST',
-    data:{"number":num,"securityToken":token},
+    data:{"number":num,"securityToken":code},
     url: "http://www.yosephradding.com:8000/getUserInfo",
     success: function(data){
         alert('horray! 200 status code!');
     },
-
     statusCode: {
     401: function() {
        alert('bad request');
