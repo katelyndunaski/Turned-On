@@ -38,6 +38,7 @@ $("#signinform").submit(function (e) {
 
 
 function login(){
+    num = $("#phoneNumber").val();
     var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
@@ -47,7 +48,7 @@ function login(){
 
     $.ajax({
     type: 'POST',
-    data:{"number":num,"verificationCode":code},
+    data:{"number":$("#phoneNumber").val(),"verificationCode":code},
     url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
     success: function(data){
         alert('1111111111111horray! 200 status code!');
