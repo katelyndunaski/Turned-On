@@ -14,12 +14,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
-<<<<<<< HEAD
-    <link href="theme.css" rel = "stylesheet">
-      
-=======
+
+
     <link rel="stylesheet" type="text/css" href="theme.css">
->>>>>>> FETCH_HEAD
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -60,10 +58,13 @@
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-<<<<<<< HEAD
-=======
+
     <div class="jumbotron">
->>>>>>> FETCH_HEAD
+      <div id = "replaceAfterLogin1" class="container">
+        <h1>Hello!</h1>
+        <p>Turn on is a platform where you can connect with people with same interests around you!</p>
+        <button id = "createAcc" type="button" class="btn btn-success" onclick="create_account()">Don't have accoount? Create one!</button>
+
       <div class="container">
         <h1 style = "color:white">Get TurnedOn Now!</h1>
         <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
@@ -82,6 +83,38 @@
       </div>
       <hr>
     </div> <!-- /container -->
+
+    <div class="jumbotron" style = "height:700px">
+      <div id = "signscreen" class="container">
+        <h1>Create Account</h1>
+        <p>Create account and connect with people around you!</p>
+        <br/><hr/>
+        First Name : <input type="text" name = "username" size = "50"/>
+        <br/> <br/>
+        Phone Number : <input type="text" name = "username" size = "50"/>
+        <br/> <br/>
+        <p> select the city you live in: </p>
+        <hr/>
+        select among this list below : <br/>
+        <select name ="activity">
+        <option value = "0" >please choose from below </option>
+        <option value = "1"> "Providence" </option>
+        <option value = "2"> "New York" </option>
+        <option value = "3"> "LA" </option>
+        <option value = "4"> "Boston" </option>
+        <option value = "5"> "Chicago" </option>    
+        </select>
+        <br/><br/>
+        <form action="database_filename" method = "get" >
+          <input type="submit" value = "Create Account" />
+          <br/> <br/>
+          Verification Code : <input type = "password" name="password"/>
+          <br/>
+          <input type="submit" value = "Create Account" />
+        </form>
+
+      </div>
+    </div>
 
 
     <!-- Bootstrap core JavaScript
