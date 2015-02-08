@@ -23,7 +23,7 @@ def createUser(request):
 	firstName = request.POST.get("firstName")
 	regionCode = request.POST.get("regionCode")
 
-	newUser = UserPhone(userPhoneNumber, firstName, regionCode)
+	newUser = UserPhone(phone_number=userPhoneNumber, name = firstName, region = regionCode)
 	newUser.save()
 
 	response = HttpResponse()
