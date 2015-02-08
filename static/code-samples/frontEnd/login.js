@@ -80,9 +80,10 @@ function create_account(){
 }
 
 function signupAccount(){
+    console.write($("#phone").val());
     $.ajax({
         type:"POST",
-        data:{"verificationCode":$("#ver").val(),"number":$("#phone").val()},
+        data:{"verificationCode":$("#ver").val(),"number":},
         url: "http://www.yosephradding.com:8000/checkWhetherSmsVerificationCodeIsValidAndReturnAToken",
         success: function(data){
         alert('horray! 200 status code! token = '+ token);
