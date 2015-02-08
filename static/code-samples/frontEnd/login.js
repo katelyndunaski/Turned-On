@@ -82,7 +82,8 @@ function login_screen(data){
     $("body").append(x);
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data.firstName + "</p> ");
-    
+    string = "<form><input type = 'text' id='nooo'></input><button onclick='create($(localStorage.getItem('turnedOnCookie'),$('#noooo').val())></button></form>";
+    $("body").append(string);
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")
