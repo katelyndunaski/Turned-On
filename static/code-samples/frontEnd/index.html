@@ -14,10 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <link rel="stylesheet" type="text/css" href="theme.css">
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,7 +41,7 @@
             <div class="form-group">
               <input type="verification" id = "verify" placeholder = "Verficiation Code" class ="form-control" >
             </div>
-            <button id="signin"  onclick="login()" type="submit" class="btn btn-success">Sign in</button>
+            <button id="signin"  onclick="login()" type="button" class="btn btn-success">Sign in</button>
           </form>
           <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -57,20 +54,24 @@
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-
+      <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
+<<<<<<< HEAD
       <div id = "replaceAfterLogin1" class="container jumbotron">
         <h1>Hello!</h1>
         <p>Turn on is a platform where you can connect with people with same interests around you!</p>
         <button id = "createAcc" type="button" class="btn btn-success" onclick="create_account()">Don't have accoount? Create one!</button>
 
       <div class="container">
+=======
+      <div class="container-fluid">
+>>>>>>> FETCH_HEAD
         <h1 style = "color:white">Get TurnedOn Now!</h1>
         <p style = "color:white">Connect instantly via text with people around you who share your interests!</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p><button  id="      "  onclick="  ()" type="button"   class="btn btn-primary btn-lg" >Learn more &raquo;</a></p>
       </div>
     </div>
+
 
     <div class="container">
       <!-- Example row of columns -->
@@ -94,10 +95,13 @@
       <div id = "signscreen" class="container">
         <h1><br>Create Account</h1>
         <p>Create account and connect with people around you!</p>
-        <br/><hr/>
-        First Name : <input type="text" name = "username" size = "50"/>
+        <br/>
+        First Name   : <input type="text" name = "username" size = "50"/>
         <br/> <br/>
+
+        <form action="database_filename" method = "get" >
         Phone Number : <input type="text" name = "username" size = "50"/>
+<<<<<<< HEAD
         <br/>
         <hr/>
         <p> select the city you live in: </p>
@@ -113,10 +117,21 @@
             </select>
           </datalist> 
           </form>
+=======
+        <br/><br/>
+        <input type="submit" value = "Get Verification Code" />
+        <br/><br/>
+        </form>
+
+        <p> select the city you live in: </p>
+        select among this list below : <br/>
+        <select name ="activity" id = "region">
+          <option value = "0" >please choose from below </option>
+              
+        </select>
+>>>>>>> FETCH_HEAD
         <br/><br/>
         <form action="database_filename" method = "get" >
-          <input type="submit" value = "Create Account" />
-          <br/> <br/>
           Verification Code : <input type = "password" name="password"/>
           <br/>
           <input type="submit" value = "Create Account" />
@@ -125,13 +140,33 @@
       </div>
     </div>
 
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
-
+    var code;
+    var cityName;
+    $.ajax({
+    type: 'GET',
+    url: "http://yosephradding.com:8000/giveMeRegions/",
+    success: function(data){
+        for(i = 0, len= data.length; i < len; i++){
+          var newDiv=document.createElement('option');
+          code = data[i]["code"];
+          cityName = data[i]["name"]; 
+          $(newDiv).attr("value",code);
+          $(newDiv).append(cityName);
+          // var html =  "<option value="+code+">"+cityName+"</option>";
+          // document.getElementById("region").appendChild(newDiv);
+          $("#region").append(newDiv);
+        }  
+    },
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+  
     </script>
     <script src="bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
   
