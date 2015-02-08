@@ -103,10 +103,15 @@
           <p> select the city you live in: </p>
           select among this list below : <br/>
           <div>
-            <select name ="activity" id = "region">
-            <option value = "0" >please choose from below </option>
+			<select name ="activity" id = "region" onchange="onCityWasChanged(this);">
+				<option value = "0" >please choose from below </option>
+			</select>
           </div>     
-          </select>
+
+			<div id="divOfAllGroups">
+			
+			</div>
+
           <br/>
         </form>
 
