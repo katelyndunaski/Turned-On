@@ -9,19 +9,24 @@ from datetime import datetime
 from random import randint
 from backendStuffs.models import *
 from twilio.rest import TwilioRestClient
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def home(request):
     """Renders the home page."""
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
-def createUser(request, userPhoneNumber, firstName, regionCode):
-	UserPhone.create(userPhoneNumber, firstName, regionCode)
+@csrf_exempt
+def createUser(request):
+	request.
+	f = UserPhone(userPhoneNumber, firstName, regionCode)
 
 	response = HttpResponse()
 	response.status_code = 200
 	return response
 
+@csrf_exempt
 def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
 	# TODO: check the security token.
 
@@ -34,6 +39,7 @@ def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securi
         response.status_code = 200
         return response
 
+@csrf_exempt
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
@@ -51,6 +57,7 @@ def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 		response.status_code = 401
 		return response
 
+@csrf_exempt
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	isValidCode = True
@@ -68,6 +75,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumb
 		response.status_code = 401
 		return response
 
+@csrf_exempt
 def sendSmsVerificationCode(request, userPhoneNumberToVerify):
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
