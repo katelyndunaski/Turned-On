@@ -16,6 +16,9 @@ function validate(){
 		alert("please enter your phone number!");
 	}
     console.log(num);
+    
+    
+    
 	$.ajax({
     type: "POST",
     data:{"userPhoneNumber":num},
@@ -85,30 +88,6 @@ function login_screen(data){
     // $("#signscreen").empty();
     // $("#container3").empty();
     // $("jumbotron")
-    
-    var code;
-    var cityName;
-    $.ajax({
-    type: 'GET',
-    url: "http://yosephradding.com:8000/giveMeRegions/",
-    success: function(data){
-        for(i = 0, len= data.length; i < len; i++){
-          var newDiv=document.createElement('option');
-          code = data[i]["code"];
-          cityName = data[i]["name"]; 
-          $(newDiv).attr("value",code);
-          $(newDiv).append(cityName);
-          // var html =  "<option value="+code+">"+cityName+"</option>";
-          // document.getElementById("region").appendChild(newDiv);
-          $("#region").append(newDiv);
-        }
-        
-        $("#regionDiv").show();
-    },
-    statusCode: {
-    401: function() {
-       alert('bad request');
-    }}});
 }
 
 function create(data1, data2){
