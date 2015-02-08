@@ -33,6 +33,7 @@ def createUser(request):
 		response = HttpResponse()
 		sendSmsVerificationCode(request)
 		response.status_code = 200
+		response.__setitem__("Access-Control-Allow-Origin", "*")
 		return response
 	else:
 		return sendSmsVerificationCode(request)
@@ -70,6 +71,7 @@ def subscribeUserToGroup(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
@@ -92,6 +94,7 @@ def getUserInfo(request):
 	else:
 		response = HttpResponse()
 		response.status_code = 401
+		response.__setitem__("Access-Control-Allow-Origin", "*")
 		return response
 
 @csrf_exempt
@@ -142,6 +145,7 @@ def sendSmsVerificationCode(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
@@ -169,6 +173,7 @@ def relayMessageToGroup(request):
 
 	response = HttpResponse()
 	response.status_code = 200
+	response.__setitem__("Access-Control-Allow-Origin", "*")
 	return response
 
 @csrf_exempt
