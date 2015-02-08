@@ -198,6 +198,7 @@ def getGroupsInArea(request):
 	# 	response.status_code = 401
 	# 	return response
 	# response = []
+
 	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region").distinct())
 	print allUserGroups
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
@@ -206,6 +207,10 @@ def getGroupsInArea(request):
 
 	t = loader.get_template('backendStuffs/templatForTable.html')
 	c = RequestContext(request, {"listi":allUserGroups})
-	myResponse = HttpResponse(t.render(c), content_type="application/xhtml+xml")
+	theRenderedContents = t.render(c)
+
+	myResponse = HttpResponse()
 	myResponse.__setitem__("Access-Control-Allow-Origin", "*")
+	myResponse['content_type'] = "application/xhtml+xml"
+	myResponse.content = theRenderedContents
 	return myResponse

@@ -177,7 +177,7 @@ function onCityWasChanged(cityDropdown)
 	    data: { phoneNumber: num, region: selectedCityCode, securityToken: token },
 	    success: function(data)
 	    {
-			$('#divOfAllGroups').html(data.response);
+			$('#divOfAllGroups').html(data);
 	    },
 	    statusCode:
 	    {
