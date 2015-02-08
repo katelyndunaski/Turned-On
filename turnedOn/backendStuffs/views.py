@@ -88,7 +88,7 @@ def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
 @csrf_exempt
 def sendSmsVerificationCode(request):
 	userPhoneNumberToVerify = request.POST.get("userPhoneNumberToVerify")
-	print userPhoneNumberToVerify
+
 	# This should be the "master number" for our Twilio account.
 	fromNumber = "+14012065509"
 
@@ -97,10 +97,11 @@ def sendSmsVerificationCode(request):
 
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
-	# TODO: this code should be stored in the database as a valid code for this user.
 	verificationCode = "{0:04d}".format(randint(0,9999))
 
-	# userPhoneNumberToVerify = "2063838296"
+        user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+        user.verificationNumber = verificationCode
+        user.save()
 
 	client.messages.create(
 		to=userPhoneNumberToVerify,
