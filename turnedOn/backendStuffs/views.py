@@ -167,19 +167,20 @@ def relayMessageToGroup(request):
 	print "Hey"
 	toNumber = request.POST.get("To")
 	post = request.POST.get("Body")
-	group = UserinGroup.objects.filter(region = user.region).get(user = user)
-	groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
+	groups = UserinGroup.objects.filter(region = user.region).filter(user = user)[randint()
+	for group in groups:
+		groupList =[x.user for x in UserinGroup.objects.filter(region = group.region).filter(name = group.name).exclude(user = user)] 
 
-	ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
-	AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
+		ACCOUNT_SID = "ACf3f0805e01bc0a3db41e7aae79bc96d5"
+		AUTH_TOKEN = "acf544c7ffb70d7b888eabc81d75698a"
 
-	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
-	for i in groupList:
-		client.messages.create(
-			to=i.phone_number,
-			from_=toNumber,
-			body=post,
-		)
+		client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+		for i in groupList:
+			client.messages.create(
+				to=i.phone_number,
+				from_=toNumber,
+				body=post,
+			)
 
 	response = HttpResponse()
 	response.status_code = 200
