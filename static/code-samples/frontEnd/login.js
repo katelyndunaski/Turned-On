@@ -70,6 +70,11 @@ function login(){
 function login_screen(data){
 	// alert("adfasdfs");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
+    var name = 
     $("#replaceAfterLogin1").empty();
     $('body').load( "afterLogin.html" );
+}
+
+function create_account(){
+    window.scrollBy(0,12000); // horizontal and vertical scroll increments
 }
