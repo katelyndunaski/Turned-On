@@ -179,7 +179,7 @@ def getGroupsInArea(request):
 	allUserGroups = list(UserinGroup.objects.filter(region = area).filter(user = user).filter(isOn = True).values("name","isOn","region").distinct())
 	print allUserGroups
 	for i in  UserinGroup.objects.filter(region = area).exclude(user = user).values("name","isOn","region").distinct():
-		i.isOn = False
+		i["isOn"] = False
 		allUserGroups.append(i)
 	return JsonResponse(allUserGroups, safe = False)
 
