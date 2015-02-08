@@ -124,9 +124,9 @@ def sendSmsVerificationCode(request):
 
 	verificationCode = "{0:04d}".format(randint(0,9999))
 
-    user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
-    user.verificationNumber = verificationCode
-    user.save()
+	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+	user.verificationNumber = verificationCode
+	user.save()
 
 	client.messages.create(
 		to=userPhoneNumberToVerify,
