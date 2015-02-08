@@ -8,9 +8,34 @@
 	
 	<script type="text/javascript">
 
+	var data = [{userid:"bird", status:"on"},{userid:"katelyns", status:"on"},{userid:"soccer", status:"off"},];
+	var VarUserid = "";
+	var VarStatus = "";
+	
 		function whatToDoIfAjaxCallSucceeded(data)
 		{
-			$("#dataFromTheServerWillGoHere").html(data);
+			var items = [];
+			for (i = 0, len= data.length; i < len; i++)
+			{ 
+			  ValUserid = data[i]["userid"];
+			  ValStatus = data[i]["status"];
+			  $.each( data, function useriddataFromTheServerWillGoHere(ValUserid, Val) {
+			    items.push( "<li id='" + ValUserid + "'>" + ValStatus + "</li>" );
+			  });
+			}
+			  $( "<ul/>", {
+			    "class": "my-new-list",
+			    html: items.join( "" )
+			  }).appendTo( "body" );
+			//for (i = 0, len= data.length; i < len; i++)
+			//{ 
+			//  useridd = data[i]["userid"] + "<br>";
+			//  $("#useriddataFromTheServerWillGoHere").append(VarUserid);
+			//  statuss = data[i]["status"] + "<br>";
+			//  $("#statusdataFromTheServerWillGoHere").append(VarStatus);
+		//	}
+			  //$("#dataFromTheServerWillGoHere").html(data);
+			
 		}
 
 		function doTheAjaxRequest()
@@ -21,9 +46,16 @@
 	</script>
 	
 	<form>
-		<button type="button" id="thebutton" onclick="doTheAjaxRequest()">hi</button>
+		<button type="button" id="thebutton" onclick="whatToDoIfAjaxCallSucceeded(data)">hi</button>
 	</form>
 	
-	<div id="dataFromTheServerWillGoHere"></div>
+	<div id="useriddataFromTheServerWillGoHere"; >
+		<ol>
+			hello
+		</ol>
+	</div>
+
+	<div id="statusdataFromTheServerWillGoHere">	
+	</div>
 </body>
 </html>
