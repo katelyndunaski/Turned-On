@@ -15,11 +15,20 @@ def home(request):
     import twilio.rest
     return JsonResponse({"text":"hi"})
 
-# def createUser(request, userPhoneNumber, firstName, regionCode):
+def createUser(request, userPhoneNumber, firstName, regionCode):
+	UserPhone.create(userPhoneNumber, firstName, regionCode)
 
+	response = HttpResponse()
+	response.status_code = 200
+	return response
 
-# def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
-	
+def subscribeUserToGroup(request, userPhoneNumber, groupName, regionCode, securityToken):
+	# TODO: check the security token.
+
+	# TODO: find a Twilio number that has not been used yet for this user for any groups.
+	twilioNumber = '4012065509'
+
+	UserinGroup.create(userPhoneNumber, groupName, regionCode, True, twilioNumber)
 
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# Make sure it's not expired.
