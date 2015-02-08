@@ -136,6 +136,11 @@ function getver(){
 function handleGroupOnOff(theGroupCheckbox)
 {
 	var urlToHit = theGroupCheckbox.checked ? "http://yosephradding.com:8000/subscribeUserToGroup" : "http://yosephradding.com:8000/unsubscribeUserFromGroup";
+	
+	if (num == null)
+	{
+    	num = $("#phone").val();
+    }
     
 	// The user just turned this group on or off.
 	$.ajax({
@@ -159,6 +164,11 @@ function handleGroupOnOff(theGroupCheckbox)
 function onCityWasChanged(cityDropdown)
 {
 	var selectedCityCode = $(cityDropdown).val();
+	
+	if (num == null)
+	{
+    	num = $("#phone").val();
+    }
 	
 	// The user just turned this group on or off.
 	$.ajax({
