@@ -49,3 +49,8 @@
 form > *{
 	color: white !important;
 }
+
+input {
+	width : inherit;
+	background-color : #fff;
+}
