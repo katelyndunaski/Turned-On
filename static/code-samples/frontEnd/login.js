@@ -41,8 +41,6 @@ $("#signinform").submit(function (e) {
 function login(){
 	var code = document.getElementById("verify").value;
 	var num = document.getElementById("phoneNumber").value;
-    login_screen();
-    return;
 
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
@@ -56,7 +54,6 @@ function login(){
     success: function(data){
         token= data.authToken;
         alert('horray! 200 status code! token = '+ token);
-        login_screen();
     },
 
     statusCode: {
@@ -64,15 +61,30 @@ function login(){
        alert('bad request');
    	}}});
 	
+    $.ajax({
+    type: 'POST',
+    data:{"number":num,"securityToken":token},
+    url: "http://www.yosephradding.com:8000/getUserInfo",
+    success: function(data){
+        alert('horray! 200 status code!');
+    },
+
+    statusCode: {
+    401: function() {
+       alert('bad request');
+    }}});
+
+    login_screen(data);
 	return;	
 }
 
-function login_screen(){
+function login_screen(data){
 	// alert("adfasdfs");
 	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:absolute; left:800px; top:15px'> Welcome, </p> ");
-	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + "INSTERT TOKEN" + "</p> ");
-    $("#replaceAfterLogin1").empty();
-
+	$("#tobereplaced").html("<p style= ' color:white; font-size : 20px; position:relative; left:500px; top:15px'> Welcome, " + data[0]["name"] + "</p> ");
+    $("#signscreen").empty();
+    $("#container3").empty();
+    
 }
 
 function create_account(){
