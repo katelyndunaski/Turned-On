@@ -17,7 +17,7 @@ def home(request):
 def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 	# TODO: need to check the provided token against the value stored in the database for that phone number.
 	# Make sure it's not expired.
-	isValidToken = true
+	isValidToken = True
 
 	if isValidToken:
 		# TODO: get these from the database for this user.
@@ -33,7 +33,7 @@ def getUserInfo(request, userPhoneNumberToVerify, securityToken):
 
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request, userPhoneNumberToVerify, verificationCode):
 	# TODO: need to check the provided code against the value stored in the database for that phone number.
-	isValidCode = true
+	isValidCode = True
 
 	# TODO: this code should be stored in the database with an expiration time.
 	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
