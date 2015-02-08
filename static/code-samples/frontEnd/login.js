@@ -5,7 +5,7 @@ var token;
 var authencookie;
 
 function getcode(data){
-		alert("verfication number sent successfully");
+		alert("verification number sent successfully");
 		return true;
 }
 
@@ -139,7 +139,7 @@ function handleGroupOnOff(theGroupCheckbox)
 	
 	if (num == null)
 	{
-    	num = $("#phone").val();
+    	num = $("#phoneNumber").val();
     }
     
 	// The user just turned this group on or off.
@@ -167,7 +167,7 @@ function onCityWasChanged(cityDropdown)
 	
 	if (num == null)
 	{
-    	num = $("#phone").val();
+    	num = $("#phoneNumber").val();
     }
 	
 	// The user just turned this group on or off.
