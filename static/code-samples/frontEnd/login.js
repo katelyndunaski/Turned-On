@@ -1,6 +1,6 @@
 var attempt = 3; // Variable to count number of attempts.
 // Below function Executes on click of login button.
-
+var num;
 var token;
 var authencookie;
 
@@ -11,10 +11,11 @@ function getcode(data){
 
 
 function validate(){
-	var num = document.getElementById("phoneNumber").value;	
+	num = document.getElementById("phoneNumber").value;	
 	if(num.length == 0 ){
 		alert("please enter your phone number!");
 	}
+    console.log(num);
 	$.ajax({
     type: "POST",
     data:{"userPhoneNumberToVerify":num},
@@ -37,13 +38,12 @@ $("#signinform").submit(function (e) {
 
 
 function login(){
-	var num = document.getElementById("phoneNumber").value;
     var code = document.getElementById("verify").value;
 	if(code.length == 0 ){
 		alert("please enter your verifation number");
 		return;
     }
-	
+	console.log(num);
     $.ajax({
     type: 'POST',
     data:{"number":num,"securityToken":code},
