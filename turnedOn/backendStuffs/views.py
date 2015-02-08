@@ -66,15 +66,15 @@ def getUserInfo(request):
 
 @csrf_exempt
 def checkWhetherSmsVerificationCodeIsValidAndReturnAToken(request):
-	# TODO: need to check the provided code against the value stored in the database for that phone number.
 	userPhoneNumberToVerify = request.POST.get("number")
 	verificationCode = request.POST.get("verificationCode")
 
-	isValidCode = True
-
-	# This token should have an expiration time.
-	newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user = UserPhone.objects.get(phone_number = userPhoneNumberToVerify)
+
+	isValidCode = user.verificationNumber == verificationCode
+
+        # TODO: This token should have an expiration time.
+        newMagicTokenForThisUser = "{0:09d}".format(randint(0,999999999))
 	user.token = newMagicTokenForThisUser
 	user.save()
 
