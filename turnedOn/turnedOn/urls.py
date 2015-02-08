@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^giveMeRegions', 'backendStuffs.views.giveMeRegions', name='giveMeRegions'),
     url(r'^getGroupsInArea', 'backendStuffs.views.getGroupsInArea', name='getGroupsInArea'),
     url(r'^relay', 'backendStuffs.views.relayMessageToGroup', name='relayMessageToGroup'),
+	url(r'^createGroup', 'backendStuffs.views.createGroup', name='createGroup'),
 )
 
